@@ -1,0 +1,107 @@
+.about-section {
+  padding: var(--space-12) var(--space-6);
+  position: relative;
+  z-index: 10;
+}
+
+.about-section__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-section__card {
+  padding: var(--space-10) var(--space-12);
+  border-radius: var(--radius-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.about-section__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.about-section__desc {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+}
+
+.about-section__tools {
+  margin-top: var(--space-2);
+}
+
+.about-section__tools-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+}
+
+.about-section__tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.tool-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  color: var(--color-text-primary);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  cursor: default;
+  transition: border-color var(--duration-fast) ease, background var(--duration-fast) ease;
+}
+
+.tool-badge:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tool-badge__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.ps-icon {
+  background: #001e36;
+  color: #31a8ff;
+  border: 1px solid #31a8ff;
+}
+
+.canva-icon {
+  background: transparent;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .about-section__card {
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .about-section__title {
+    font-size: var(--text-2xl);
+  }
+
+  .about-section__desc {
+    font-size: var(--text-base);
+  }
+}

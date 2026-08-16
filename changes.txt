@@ -1,0 +1,10 @@
+1. i cannot see the headings of each section
+2. sort and organize each photo in a specific manner, currently everything is disorganized, i want to se sub headings withing the headings, for eg. under Brochures/Posters, i want to see sub headings like AWS, Log10 etc.
+3. the clothing photos are for the brand DEBUG
+4. FOR THE Logos section, there are logos which are the same remove the logos with black text
+5. if a photo is not i a folder for a heading, tag it with misc.
+6. the content under socials " AI Course Testimonial" and the aws members was intended for instagram, for smooth cool looking continous one photo, make it so that the same effect can be done here
+7. i have installed ghost script so do the neccessary changes for it
+8. include the tools i use are photoshop and canva, and include an about section
+9.my phone number is +91 83838 80639 and do no explicitly show this on the website, rather redirect using a button
+10. whenever an image is clicked on make sure the high quality image is shown, not the compressed one

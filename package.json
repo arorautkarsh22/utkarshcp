@@ -1,0 +1,25 @@
+{
+  "name": "utkarsh-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "process-images": "node scripts/process-images.mjs"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "motion": "^12.12.1",
+    "lucide-react": "^0.511.0",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.5.2",
+    "vite": "^6.3.5",
+    "sharp": "^0.34.2",
+    "pdf2pic": "^3.1.4"
+  }
+}
