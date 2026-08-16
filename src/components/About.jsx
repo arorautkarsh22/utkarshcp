@@ -22,30 +22,7 @@ export default function About() {
               </p>
             </div>
             
-            <div className="about-section__tools">
-              <h3 className="about-section__tools-title">My Toolkit</h3>
-              <div className="about-section__tools-list">
-                <motion.div 
-                  className="tool-badge"
-                  whileHover={{ y: -4, scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                >
-                  <div className="tool-badge__icon ps-icon">Ps</div>
-                  <span>Adobe Photoshop</span>
-                </motion.div>
-                
-                <motion.div 
-                  className="tool-badge"
-                  whileHover={{ y: -4, scale: 1.05 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                >
-                  <div className="tool-badge__icon canva-icon" style={{ background: 'transparent' }}>
-                    <img src="/canva-icon.png" width="24" height="24" alt="Canva" />
-                  </div>
-                  <span>Canva</span>
-                </motion.div>
-              </div>
-            </div>
+
           </div>
         </InView>
       </div>
