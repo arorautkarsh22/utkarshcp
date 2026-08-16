@@ -23,7 +23,7 @@ const CONTACT_LINKS = [
   {
     icon: FileText,
     label: 'Resume',
-    href: '#',
+    href: 'https://docs.google.com/document/d/1sxDAO9ya25jDTtxC34mk62v9pnKCsmBv6PwhOBTofFE/edit?usp=sharing',
   },
 ];
 
