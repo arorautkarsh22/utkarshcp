@@ -139,7 +139,7 @@ export default function Lightbox({ images, activeIndex, onClose }) {
               ref={imageRef}
             >
               <img
-                src={currentImage?.original || currentImage?.full}
+                src={currentImage?.full || currentImage?.original}
                 alt={currentImage?.title}
                 className="lightbox__image"
                 draggable={false}
@@ -178,7 +178,7 @@ export default function Lightbox({ images, activeIndex, onClose }) {
                 <div
                   className="lightbox__zoom-image"
                   style={{
-                    backgroundImage: `url(${currentImage?.original || currentImage?.full})`,
+                    backgroundImage: `url(${currentImage?.full || currentImage?.original})`,
                     backgroundPosition: `${zoomPos.x}% ${zoomPos.y}%`,
                     backgroundSize: '300%',
                   }}

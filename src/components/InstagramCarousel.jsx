@@ -110,6 +110,7 @@ export default function InstagramCarousel({ images, onImageClick }) {
                   src={image.thumb}
                   alt={image.title}
                   loading="lazy"
+                  decoding="async"
                   draggable={false}
                 />
               </div>

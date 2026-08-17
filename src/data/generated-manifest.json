@@ -2,8 +2,8 @@
   "brochures-posters": [
     {
       "id": "auraweb_assam_s_bridge-1",
-      "full": "designs/brochures-posters/auraweb_assam_s_bridge-1.jpg",
-      "thumb": "designs/brochures-posters/thumbs/auraweb_assam_s_bridge-1.jpg",
+      "full": "designs/brochures-posters/auraweb_assam_s_bridge-1.webp",
+      "thumb": "designs/brochures-posters/thumbs/auraweb_assam_s_bridge-1.webp",
       "original": "designs/brochures-posters/originals/auraweb_assam_s_bridge-1.png",
       "title": "ASSAM’S BRIDGE 1",
       "subcategory": "AuraWeb",
@@ -12,8 +12,8 @@
     },
     {
       "id": "aws_campus_ambasdors",
-      "full": "designs/brochures-posters/aws_campus_ambasdors.png",
-      "thumb": "designs/brochures-posters/thumbs/aws_campus_ambasdors.png",
+      "full": "designs/brochures-posters/aws_campus_ambasdors.webp",
+      "thumb": "designs/brochures-posters/thumbs/aws_campus_ambasdors.webp",
       "original": "designs/brochures-posters/originals/aws_campus_ambasdors.png",
       "title": "campus ambasdors",
       "subcategory": "AWS",
@@ -22,8 +22,8 @@
     },
     {
       "id": "aws_innovya",
-      "full": "designs/brochures-posters/aws_innovya.png",
-      "thumb": "designs/brochures-posters/thumbs/aws_innovya.png",
+      "full": "designs/brochures-posters/aws_innovya.webp",
+      "thumb": "designs/brochures-posters/thumbs/aws_innovya.webp",
       "original": "designs/brochures-posters/originals/aws_innovya.png",
       "title": "innovya",
       "subcategory": "AWS",
@@ -32,8 +32,8 @@
     },
     {
       "id": "aws_sponsor",
-      "full": "designs/brochures-posters/aws_sponsor.png",
-      "thumb": "designs/brochures-posters/thumbs/aws_sponsor.png",
+      "full": "designs/brochures-posters/aws_sponsor.webp",
+      "thumb": "designs/brochures-posters/thumbs/aws_sponsor.webp",
       "original": "designs/brochures-posters/originals/aws_sponsor.png",
       "title": "sponsor",
       "subcategory": "AWS",
@@ -42,8 +42,8 @@
     },
     {
       "id": "bavanya_hiring-1",
-      "full": "designs/brochures-posters/bavanya_hiring-1.png",
-      "thumb": "designs/brochures-posters/thumbs/bavanya_hiring-1.png",
+      "full": "designs/brochures-posters/bavanya_hiring-1.webp",
+      "thumb": "designs/brochures-posters/thumbs/bavanya_hiring-1.webp",
       "original": "designs/brochures-posters/originals/bavanya_hiring-1.png",
       "title": "Hiring 1",
       "subcategory": "Bavanya",
@@ -52,8 +52,8 @@
     },
     {
       "id": "blue_futuristic_technology_poster",
-      "full": "designs/brochures-posters/blue_futuristic_technology_poster.jpg",
-      "thumb": "designs/brochures-posters/thumbs/blue_futuristic_technology_poster.jpg",
+      "full": "designs/brochures-posters/blue_futuristic_technology_poster.webp",
+      "thumb": "designs/brochures-posters/thumbs/blue_futuristic_technology_poster.webp",
       "original": "designs/brochures-posters/originals/blue_futuristic_technology_poster.png",
       "title": "Blue Futuristic Technology Poster",
       "subcategory": null,
@@ -62,8 +62,8 @@
     },
     {
       "id": "blue_white_bold_business_seminar_event_poster",
-      "full": "designs/brochures-posters/blue_white_bold_business_seminar_event_poster.jpg",
-      "thumb": "designs/brochures-posters/thumbs/blue_white_bold_business_seminar_event_poster.jpg",
+      "full": "designs/brochures-posters/blue_white_bold_business_seminar_event_poster.webp",
+      "thumb": "designs/brochures-posters/thumbs/blue_white_bold_business_seminar_event_poster.webp",
       "original": "designs/brochures-posters/originals/blue_white_bold_business_seminar_event_poster.png",
       "title": "Blue White Bold Business Seminar Event Poster",
       "subcategory": null,
@@ -72,8 +72,8 @@
     },
     {
       "id": "gurmeet_kaur_kwatra",
-      "full": "designs/brochures-posters/gurmeet_kaur_kwatra.jpg",
-      "thumb": "designs/brochures-posters/thumbs/gurmeet_kaur_kwatra.jpg",
+      "full": "designs/brochures-posters/gurmeet_kaur_kwatra.webp",
+      "thumb": "designs/brochures-posters/thumbs/gurmeet_kaur_kwatra.webp",
       "original": "designs/brochures-posters/originals/gurmeet_kaur_kwatra.png",
       "title": "Gurmeet Kaur Kwatra",
       "subcategory": null,
@@ -82,8 +82,8 @@
     },
     {
       "id": "ieee_conference-1",
-      "full": "designs/brochures-posters/ieee_conference-1.png",
-      "thumb": "designs/brochures-posters/thumbs/ieee_conference-1.png",
+      "full": "designs/brochures-posters/ieee_conference-1.webp",
+      "thumb": "designs/brochures-posters/thumbs/ieee_conference-1.webp",
       "original": "designs/brochures-posters/originals/ieee_conference-1.png",
       "title": "IEEE CONFERENCE 1",
       "subcategory": null,
@@ -92,8 +92,8 @@
     },
     {
       "id": "log10_ai-powerhouse-workshop-1",
-      "full": "designs/brochures-posters/log10_ai-powerhouse-workshop-1.jpg",
-      "thumb": "designs/brochures-posters/thumbs/log10_ai-powerhouse-workshop-1.jpg",
+      "full": "designs/brochures-posters/log10_ai-powerhouse-workshop-1.webp",
+      "thumb": "designs/brochures-posters/thumbs/log10_ai-powerhouse-workshop-1.webp",
       "original": "designs/brochures-posters/originals/log10_ai-powerhouse-workshop-1.png",
       "title": "AI powerhouse workshop 1",
       "subcategory": "Log10",
@@ -102,8 +102,8 @@
     },
     {
       "id": "log10_copy_of_hackfest",
-      "full": "designs/brochures-posters/log10_copy_of_hackfest.jpg",
-      "thumb": "designs/brochures-posters/thumbs/log10_copy_of_hackfest.jpg",
+      "full": "designs/brochures-posters/log10_copy_of_hackfest.webp",
+      "thumb": "designs/brochures-posters/thumbs/log10_copy_of_hackfest.webp",
       "original": "designs/brochures-posters/originals/log10_copy_of_hackfest.png",
       "title": "Copy of Hackfest",
       "subcategory": "Log10",
@@ -112,8 +112,8 @@
     },
     {
       "id": "log10_draft",
-      "full": "designs/brochures-posters/log10_draft.png",
-      "thumb": "designs/brochures-posters/thumbs/log10_draft.png",
+      "full": "designs/brochures-posters/log10_draft.webp",
+      "thumb": "designs/brochures-posters/thumbs/log10_draft.webp",
       "original": "designs/brochures-posters/originals/log10_draft.png",
       "title": "draft",
       "subcategory": "Log10",
@@ -122,8 +122,8 @@
     },
     {
       "id": "log10_gateway-to-defence-careers",
-      "full": "designs/brochures-posters/log10_gateway-to-defence-careers.jpg",
-      "thumb": "designs/brochures-posters/thumbs/log10_gateway-to-defence-careers.jpg",
+      "full": "designs/brochures-posters/log10_gateway-to-defence-careers.webp",
+      "thumb": "designs/brochures-posters/thumbs/log10_gateway-to-defence-careers.webp",
       "original": "designs/brochures-posters/originals/log10_gateway-to-defence-careers.png",
       "title": "Gateway to defence careers",
       "subcategory": "Log10",
@@ -132,8 +132,8 @@
     },
     {
       "id": "log10_shhh",
-      "full": "designs/brochures-posters/log10_shhh.jpg",
-      "thumb": "designs/brochures-posters/thumbs/log10_shhh.jpg",
+      "full": "designs/brochures-posters/log10_shhh.webp",
+      "thumb": "designs/brochures-posters/thumbs/log10_shhh.webp",
       "original": "designs/brochures-posters/originals/log10_shhh.png",
       "title": "Shhh",
       "subcategory": "Log10",
@@ -142,8 +142,8 @@
     },
     {
       "id": "log10_training_session_poster_promotion_instagram",
-      "full": "designs/brochures-posters/log10_training_session_poster_promotion_instagram.jpg",
-      "thumb": "designs/brochures-posters/thumbs/log10_training_session_poster_promotion_instagram.jpg",
+      "full": "designs/brochures-posters/log10_training_session_poster_promotion_instagram.webp",
+      "thumb": "designs/brochures-posters/thumbs/log10_training_session_poster_promotion_instagram.webp",
       "original": "designs/brochures-posters/originals/log10_training_session_poster_promotion_instagram.png",
       "title": "Training Session Poster Promotion Instagram",
       "subcategory": "Log10",
@@ -157,44 +157,44 @@
       "isBrochure": true,
       "pages": [
         {
-          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-1.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-1.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-1.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-1.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_hampta_pass_hampta_pass-1.png",
           "title": "Hampta Pass"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-2.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-2.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-2.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-2.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_hampta_pass_hampta_pass-2.png",
           "title": "Hampta Pass"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-3.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-3.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-3.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-3.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_hampta_pass_hampta_pass-3.png",
           "title": "Hampta Pass"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-4.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-4.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-4.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-4.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_hampta_pass_hampta_pass-4.png",
           "title": "Hampta Pass"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-5.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-5.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-5.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-5.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_hampta_pass_hampta_pass-5.png",
           "title": "Hampta Pass"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-6.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-6.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-6.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-6.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_hampta_pass_hampta_pass-6.png",
           "title": "Hampta Pass"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-7.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-7.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_hampta_pass_hampta_pass-7.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_hampta_pass_hampta_pass-7.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_hampta_pass_hampta_pass-7.png",
           "title": "Hampta Pass"
         }
@@ -208,44 +208,44 @@
       "isBrochure": true,
       "pages": [
         {
-          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-1.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-1.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-1.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-1.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-1.png",
           "title": "Nag Tibba Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-2.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-2.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-2.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-2.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-2.png",
           "title": "Nag Tibba Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-3.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-3.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-3.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-3.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-3.png",
           "title": "Nag Tibba Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-4.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-4.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-4.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-4.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-4.png",
           "title": "Nag Tibba Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-5.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-5.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-5.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-5.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-5.png",
           "title": "Nag Tibba Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-6.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-6.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-6.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-6.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-6.png",
           "title": "Nag Tibba Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-7.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-7.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-7.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-7.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_nag_tibba_trek_nag_tibba_trek-7.png",
           "title": "Nag Tibba Trek"
         }
@@ -259,44 +259,44 @@
       "isBrochure": true,
       "pages": [
         {
-          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-1.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-1.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-1.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-1.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_sar_pass_trek_sar_pass_trek-1.png",
           "title": "Sar Pass Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-2.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-2.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-2.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-2.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_sar_pass_trek_sar_pass_trek-2.png",
           "title": "Sar Pass Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-3.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-3.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-3.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-3.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_sar_pass_trek_sar_pass_trek-3.png",
           "title": "Sar Pass Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-4.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-4.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-4.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-4.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_sar_pass_trek_sar_pass_trek-4.png",
           "title": "Sar Pass Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-5.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-5.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-5.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-5.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_sar_pass_trek_sar_pass_trek-5.png",
           "title": "Sar Pass Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-6.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-6.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-6.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-6.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_sar_pass_trek_sar_pass_trek-6.png",
           "title": "Sar Pass Trek"
         },
         {
-          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-7.jpg",
-          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-7.jpg",
+          "full": "designs/brochures-posters/the_peak_freaks_sar_pass_trek_sar_pass_trek-7.webp",
+          "thumb": "designs/brochures-posters/thumbs/the_peak_freaks_sar_pass_trek_sar_pass_trek-7.webp",
           "original": "designs/brochures-posters/originals/the_peak_freaks_sar_pass_trek_sar_pass_trek-7.png",
           "title": "Sar Pass Trek"
         }
@@ -307,8 +307,8 @@
   "clothing": [
     {
       "id": "2_-_copy",
-      "full": "designs/clothing/2_-_copy.png",
-      "thumb": "designs/clothing/thumbs/2_-_copy.png",
+      "full": "designs/clothing/2_-_copy.webp",
+      "thumb": "designs/clothing/thumbs/2_-_copy.webp",
       "original": "designs/clothing/originals/2_-_copy.png",
       "title": "2 Copy",
       "subcategory": "DEBUG",
@@ -317,8 +317,8 @@
     },
     {
       "id": "419858750_11743957",
-      "full": "designs/clothing/419858750_11743957.png",
-      "thumb": "designs/clothing/thumbs/419858750_11743957.png",
+      "full": "designs/clothing/419858750_11743957.webp",
+      "thumb": "designs/clothing/thumbs/419858750_11743957.webp",
       "original": "designs/clothing/originals/419858750_11743957.png",
       "title": "419858750 11743957",
       "subcategory": "DEBUG",
@@ -327,8 +327,8 @@
     },
     {
       "id": "5_-_copy",
-      "full": "designs/clothing/5_-_copy.png",
-      "thumb": "designs/clothing/thumbs/5_-_copy.png",
+      "full": "designs/clothing/5_-_copy.webp",
+      "thumb": "designs/clothing/thumbs/5_-_copy.webp",
       "original": "designs/clothing/originals/5_-_copy.png",
       "title": "5 Copy",
       "subcategory": "DEBUG",
@@ -337,8 +337,8 @@
     },
     {
       "id": "whatsapp_image_2026-08-16_at_2.47.03_am",
-      "full": "designs/clothing/whatsapp_image_2026-08-16_at_2.47.03_am.jpg",
-      "thumb": "designs/clothing/thumbs/whatsapp_image_2026-08-16_at_2.47.03_am.jpg",
+      "full": "designs/clothing/whatsapp_image_2026-08-16_at_2.47.03_am.webp",
+      "thumb": "designs/clothing/thumbs/whatsapp_image_2026-08-16_at_2.47.03_am.webp",
       "original": "designs/clothing/originals/whatsapp_image_2026-08-16_at_2.47.03_am.jpeg",
       "title": "WhatsApp Image 2026 08 16 at 2.47.03 AM",
       "subcategory": "DEBUG",
@@ -347,8 +347,8 @@
     },
     {
       "id": "whatsapp_image_2026-08-16_at_2.51.09_am",
-      "full": "designs/clothing/whatsapp_image_2026-08-16_at_2.51.09_am.jpg",
-      "thumb": "designs/clothing/thumbs/whatsapp_image_2026-08-16_at_2.51.09_am.jpg",
+      "full": "designs/clothing/whatsapp_image_2026-08-16_at_2.51.09_am.webp",
+      "thumb": "designs/clothing/thumbs/whatsapp_image_2026-08-16_at_2.51.09_am.webp",
       "original": "designs/clothing/originals/whatsapp_image_2026-08-16_at_2.51.09_am.jpeg",
       "title": "WhatsApp Image 2026 08 16 at 2.51.09 AM",
       "subcategory": "DEBUG",
@@ -357,8 +357,8 @@
     },
     {
       "id": "whatsapp_image_2026-08-16_at_2.54.12_am",
-      "full": "designs/clothing/whatsapp_image_2026-08-16_at_2.54.12_am.jpg",
-      "thumb": "designs/clothing/thumbs/whatsapp_image_2026-08-16_at_2.54.12_am.jpg",
+      "full": "designs/clothing/whatsapp_image_2026-08-16_at_2.54.12_am.webp",
+      "thumb": "designs/clothing/thumbs/whatsapp_image_2026-08-16_at_2.54.12_am.webp",
       "original": "designs/clothing/originals/whatsapp_image_2026-08-16_at_2.54.12_am.jpeg",
       "title": "WhatsApp Image 2026 08 16 at 2.54.12 AM",
       "subcategory": "DEBUG",
@@ -369,8 +369,8 @@
   "logos": [
     {
       "id": "aws_aws_sbg_with_bg-removebg-preview",
-      "full": "designs/logos/aws_aws_sbg_with_bg-removebg-preview.png",
-      "thumb": "designs/logos/thumbs/aws_aws_sbg_with_bg-removebg-preview.png",
+      "full": "designs/logos/aws_aws_sbg_with_bg-removebg-preview.webp",
+      "thumb": "designs/logos/thumbs/aws_aws_sbg_with_bg-removebg-preview.webp",
       "original": "designs/logos/originals/aws_aws_sbg_with_bg-removebg-preview.png",
       "title": "aws sbg with bg removebg preview",
       "subcategory": "AWS",
@@ -379,8 +379,8 @@
     },
     {
       "id": "bavanya_bavanya_logo-1",
-      "full": "designs/logos/bavanya_bavanya_logo-1.png",
-      "thumb": "designs/logos/thumbs/bavanya_bavanya_logo-1.png",
+      "full": "designs/logos/bavanya_bavanya_logo-1.webp",
+      "thumb": "designs/logos/thumbs/bavanya_bavanya_logo-1.webp",
       "original": "designs/logos/originals/bavanya_bavanya_logo-1.png",
       "title": "bavanya logo 1",
       "subcategory": "Bavanya",
@@ -389,8 +389,8 @@
     },
     {
       "id": "log10_log_10__6_",
-      "full": "designs/logos/log10_log_10__6_.png",
-      "thumb": "designs/logos/thumbs/log10_log_10__6_.png",
+      "full": "designs/logos/log10_log_10__6_.webp",
+      "thumb": "designs/logos/thumbs/log10_log_10__6_.webp",
       "original": "designs/logos/originals/log10_log_10__6_.png",
       "title": "LOG 10 (6)",
       "subcategory": "Log10",
@@ -399,8 +399,8 @@
     },
     {
       "id": "rabal_3",
-      "full": "designs/logos/rabal_3.png",
-      "thumb": "designs/logos/thumbs/rabal_3.png",
+      "full": "designs/logos/rabal_3.webp",
+      "thumb": "designs/logos/thumbs/rabal_3.webp",
       "original": "designs/logos/originals/rabal_3.png",
       "title": "3",
       "subcategory": "Rabal",
@@ -409,8 +409,8 @@
     },
     {
       "id": "ui_orbit_ui_orbit_trap_logo",
-      "full": "designs/logos/ui_orbit_ui_orbit_trap_logo.jpg",
-      "thumb": "designs/logos/thumbs/ui_orbit_ui_orbit_trap_logo.jpg",
+      "full": "designs/logos/ui_orbit_ui_orbit_trap_logo.webp",
+      "thumb": "designs/logos/thumbs/ui_orbit_ui_orbit_trap_logo.webp",
       "original": "designs/logos/originals/ui_orbit_ui_orbit_trap_logo.png",
       "title": "UI ORBIT TRAP LOGO",
       "subcategory": "UI Orbit",
@@ -421,8 +421,8 @@
   "socials": [
     {
       "id": "auraweb_70862_53689",
-      "full": "designs/socials/auraweb_70862_53689.jpg",
-      "thumb": "designs/socials/thumbs/auraweb_70862_53689.jpg",
+      "full": "designs/socials/auraweb_70862_53689.webp",
+      "thumb": "designs/socials/thumbs/auraweb_70862_53689.webp",
       "original": "designs/socials/originals/auraweb_70862_53689.png",
       "title": "70862 53689",
       "subcategory": "AuraWeb",
@@ -430,10 +430,10 @@
       "isBrochure": false
     },
     {
-      "id": "auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_like_making_songs__generating_images__and_writing_effective_prompts._overall__it_was_a_great_experi",
-      "full": "designs/socials/auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_like_making_songs__generating_images__and_writing_effective_prompts._overall__it_was_a_great_experi.jpg",
-      "thumb": "designs/socials/thumbs/auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_like_making_songs__generating_images__and_writing_effective_prompts._overall__it_was_a_great_experi.png",
-      "original": "designs/socials/originals/auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_like_making_songs__generating_images__and_writing_effective_prompts._overall__it_was_a_great_experi.png",
+      "id": "auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_lik",
+      "full": "designs/socials/auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_lik.webp",
+      "thumb": "designs/socials/thumbs/auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_lik.webp",
+      "original": "designs/socials/originals/auraweb_the_al-related_course_was_very_interesting_and_useful._i_learned_new_creative_skills_lik.png",
       "title": "The Al related course was very interesting and useful. I learned new creative skills like making songs, generating images, and writing effective prompts. Overall, it was a great experi",
       "subcategory": "AuraWeb",
       "instagram": true,
@@ -441,8 +441,8 @@
     },
     {
       "id": "aws_1._front_page",
-      "full": "designs/socials/aws_1._front_page.png",
-      "thumb": "designs/socials/thumbs/aws_1._front_page.png",
+      "full": "designs/socials/aws_1._front_page.webp",
+      "thumb": "designs/socials/thumbs/aws_1._front_page.webp",
       "original": "designs/socials/originals/aws_1._front_page.png",
       "title": "1. Front page",
       "subcategory": "AWS",
@@ -451,8 +451,8 @@
     },
     {
       "id": "aws_2._rehan",
-      "full": "designs/socials/aws_2._rehan.png",
-      "thumb": "designs/socials/thumbs/aws_2._rehan.png",
+      "full": "designs/socials/aws_2._rehan.webp",
+      "thumb": "designs/socials/thumbs/aws_2._rehan.webp",
       "original": "designs/socials/originals/aws_2._rehan.png",
       "title": "2. Rehan",
       "subcategory": "AWS",
@@ -461,8 +461,8 @@
     },
     {
       "id": "aws_3._lakshay",
-      "full": "designs/socials/aws_3._lakshay.png",
-      "thumb": "designs/socials/thumbs/aws_3._lakshay.png",
+      "full": "designs/socials/aws_3._lakshay.webp",
+      "thumb": "designs/socials/thumbs/aws_3._lakshay.webp",
       "original": "designs/socials/originals/aws_3._lakshay.png",
       "title": "3. Lakshay",
       "subcategory": "AWS",
@@ -471,8 +471,8 @@
     },
     {
       "id": "aws_4._nikunj",
-      "full": "designs/socials/aws_4._nikunj.png",
-      "thumb": "designs/socials/thumbs/aws_4._nikunj.png",
+      "full": "designs/socials/aws_4._nikunj.webp",
+      "thumb": "designs/socials/thumbs/aws_4._nikunj.webp",
       "original": "designs/socials/originals/aws_4._nikunj.png",
       "title": "4. Nikunj",
       "subcategory": "AWS",
@@ -481,8 +481,8 @@
     },
     {
       "id": "aws_5._vasudev",
-      "full": "designs/socials/aws_5._vasudev.png",
-      "thumb": "designs/socials/thumbs/aws_5._vasudev.png",
+      "full": "designs/socials/aws_5._vasudev.webp",
+      "thumb": "designs/socials/thumbs/aws_5._vasudev.webp",
       "original": "designs/socials/originals/aws_5._vasudev.png",
       "title": "5. Vasudev",
       "subcategory": "AWS",
@@ -491,8 +491,8 @@
     },
     {
       "id": "aws_6._anshika",
-      "full": "designs/socials/aws_6._anshika.png",
-      "thumb": "designs/socials/thumbs/aws_6._anshika.png",
+      "full": "designs/socials/aws_6._anshika.webp",
+      "thumb": "designs/socials/thumbs/aws_6._anshika.webp",
       "original": "designs/socials/originals/aws_6._anshika.png",
       "title": "6. Anshika",
       "subcategory": "AWS",
@@ -501,8 +501,8 @@
     },
     {
       "id": "aws_7._utkarsh",
-      "full": "designs/socials/aws_7._utkarsh.png",
-      "thumb": "designs/socials/thumbs/aws_7._utkarsh.png",
+      "full": "designs/socials/aws_7._utkarsh.webp",
+      "thumb": "designs/socials/thumbs/aws_7._utkarsh.webp",
       "original": "designs/socials/originals/aws_7._utkarsh.png",
       "title": "7. Utkarsh",
       "subcategory": "AWS",
@@ -511,8 +511,8 @@
     },
     {
       "id": "aws_8._prince",
-      "full": "designs/socials/aws_8._prince.png",
-      "thumb": "designs/socials/thumbs/aws_8._prince.png",
+      "full": "designs/socials/aws_8._prince.webp",
+      "thumb": "designs/socials/thumbs/aws_8._prince.webp",
       "original": "designs/socials/originals/aws_8._prince.png",
       "title": "8. Prince",
       "subcategory": "AWS",
@@ -521,8 +521,8 @@
     },
     {
       "id": "aws_9._sagar",
-      "full": "designs/socials/aws_9._sagar.png",
-      "thumb": "designs/socials/thumbs/aws_9._sagar.png",
+      "full": "designs/socials/aws_9._sagar.webp",
+      "thumb": "designs/socials/thumbs/aws_9._sagar.webp",
       "original": "designs/socials/originals/aws_9._sagar.png",
       "title": "9. Sagar",
       "subcategory": "AWS",

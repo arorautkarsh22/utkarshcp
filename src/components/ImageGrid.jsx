@@ -58,6 +58,7 @@ function ImageCard({ image, index, onClick }) {
           alt={image.title}
           className={`image-card__image ${loaded ? 'image-card__image--loaded' : ''}`}
           loading="lazy"
+          decoding="async"
           onLoad={() => setLoaded(true)}
           draggable={false}
         />
@@ -120,6 +121,7 @@ function BrochureCard({ image, onClick }) {
           alt={`${image.title} - Page ${pageIndex + 1}`}
           className={`image-card__image ${loaded ? 'image-card__image--loaded' : ''}`}
           loading="lazy"
+          decoding="async"
           onLoad={() => setLoaded(true)}
           draggable={false}
           style={{ transition: 'opacity 0.3s ease' }}

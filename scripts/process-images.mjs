@@ -66,21 +66,12 @@ async function processImage(inputPath, outputPath, isThumb = false) {
       });
     }
 
-    if (metadata.hasAlpha) {
-      await pipeline
-        .png({ quality: Math.min(quality, 100), compressionLevel: 8 })
-        .toFile(outputPath.replace(/\.\w+$/, '.png'));
-    } else {
-      await pipeline
-        .jpeg({ quality, mozjpeg: true })
-        .toFile(outputPath.replace(/\.\w+$/, '.jpg'));
-    }
+    // Force WebP format for all processed images for better optimization
+    await pipeline
+      .webp({ quality, effort: 4 })
+      .toFile(outputPath.replace(/\.\w+$/, '.webp'));
 
-    const finalPath = fs.existsSync(outputPath.replace(/\.\w+$/, '.jpg'))
-      ? outputPath.replace(/\.\w+$/, '.jpg')
-      : outputPath.replace(/\.\w+$/, '.png');
-      
-    return path.basename(finalPath);
+    return path.basename(outputPath.replace(/\.\w+$/, '.webp'));
   } catch (err) {
     console.error(`    ✗ Error processing ${path.basename(inputPath)}: ${err.message}`);
     fs.copyFileSync(inputPath, outputPath);
@@ -89,7 +80,14 @@ async function processImage(inputPath, outputPath, isThumb = false) {
 }
 
 function sanitizeFilename(name) {
-  return name.replace(/[^a-zA-Z0-9._-]/g, '_').toLowerCase();
+  let safe = name.replace(/[^a-zA-Z0-9._-]/g, '_').toLowerCase();
+  if (safe.length > 100) {
+    const extMatch = safe.match(/\.[^.]+$/);
+    const ext = extMatch ? extMatch[0] : '';
+    const base = extMatch ? safe.slice(0, -ext.length) : safe;
+    safe = base.substring(0, 100 - ext.length) + ext;
+  }
+  return safe;
 }
 
 async function main() {
