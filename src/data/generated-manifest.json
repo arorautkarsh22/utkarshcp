@@ -81,6 +81,16 @@
       "isBrochure": false
     },
     {
+      "id": "hindustan_water_solution_vishwakarma_puja",
+      "full": "designs/brochures-posters/hindustan_water_solution_vishwakarma_puja.webp",
+      "thumb": "designs/brochures-posters/thumbs/hindustan_water_solution_vishwakarma_puja.webp",
+      "original": "designs/brochures-posters/originals/hindustan_water_solution_vishwakarma_puja.png",
+      "title": "vishwakarma puja",
+      "subcategory": "Hindustan Water Solution",
+      "instagram": false,
+      "isBrochure": false
+    },
+    {
       "id": "ieee_conference-1",
       "full": "designs/brochures-posters/ieee_conference-1.webp",
       "thumb": "designs/brochures-posters/thumbs/ieee_conference-1.webp",
