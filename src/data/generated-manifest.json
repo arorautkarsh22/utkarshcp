@@ -532,21 +532,31 @@
   ],
   "web-development": [
     {
-      "id": "sge_real_estates_sgereal_admin_view",
-      "full": "designs/web-development/sge_real_estates_sgereal_admin_view.webp",
-      "thumb": "designs/web-development/thumbs/sge_real_estates_sgereal_admin_view.webp",
-      "original": "designs/web-development/originals/sge_real_estates_sgereal_admin_view.jpg",
-      "title": "sgereal admin view",
+      "id": "sge_real_estates_1_home",
+      "full": "designs/web-development/sge_real_estates_1_home.webp",
+      "thumb": "designs/web-development/thumbs/sge_real_estates_1_home.webp",
+      "original": "designs/web-development/originals/sge_real_estates_1_home.png",
+      "title": "1 Home",
       "subcategory": "SGE Real Estates",
       "instagram": false,
       "isBrochure": false
     },
     {
-      "id": "sge_real_estates_sgereal_user_view",
-      "full": "designs/web-development/sge_real_estates_sgereal_user_view.webp",
-      "thumb": "designs/web-development/thumbs/sge_real_estates_sgereal_user_view.webp",
-      "original": "designs/web-development/originals/sge_real_estates_sgereal_user_view.jpg",
-      "title": "sgereal user view",
+      "id": "sge_real_estates_2_dashboard",
+      "full": "designs/web-development/sge_real_estates_2_dashboard.webp",
+      "thumb": "designs/web-development/thumbs/sge_real_estates_2_dashboard.webp",
+      "original": "designs/web-development/originals/sge_real_estates_2_dashboard.png",
+      "title": "2 Dashboard",
+      "subcategory": "SGE Real Estates",
+      "instagram": false,
+      "isBrochure": false
+    },
+    {
+      "id": "sge_real_estates_3_projects",
+      "full": "designs/web-development/sge_real_estates_3_projects.webp",
+      "thumb": "designs/web-development/thumbs/sge_real_estates_3_projects.webp",
+      "original": "designs/web-development/originals/sge_real_estates_3_projects.png",
+      "title": "3 Projects",
       "subcategory": "SGE Real Estates",
       "instagram": false,
       "isBrochure": false
