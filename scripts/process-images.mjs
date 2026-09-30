@@ -16,7 +16,7 @@ const THUMB_WIDTH = 600;
 const THUMB_HEIGHT = 600;
 const THUMB_QUALITY = 80;
 
-const CATEGORIES = ['Brochures-Posters', 'Clothing', 'Logos', 'Socials'];
+const CATEGORIES = ['Brochures-Posters', 'Clothing', 'Logos', 'Socials', 'Web-Development'];
 
 function ensureDir(dir) {
   if (!fs.existsSync(dir)) {

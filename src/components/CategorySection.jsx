@@ -21,6 +21,10 @@ const CATEGORY_META = {
     title: 'Socials',
     subtitle: 'Social media graphics and digital campaigns',
   },
+  'web-development': {
+    title: 'Web Development (UI/UX)',
+    subtitle: 'User interfaces, digital experiences, and web applications',
+  },
 };
 
 export default function CategorySection({ categoryId, images, onImageClick }) {
@@ -75,7 +79,29 @@ export default function CategorySection({ categoryId, images, onImageClick }) {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="category-section__subheader">
-                    <h3 className="category-section__subtitle">{subKey}</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                      <h3 className="category-section__subtitle">{subKey}</h3>
+                      {subKey === 'SGE Real Estates' && (
+                        <a 
+                          href="https://sgereal.com" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="glass-card"
+                          style={{ 
+                            padding: '0.25rem 0.75rem', 
+                            fontSize: '0.875rem', 
+                            textDecoration: 'none',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem',
+                            color: 'inherit'
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                          Visit Website
+                        </a>
+                      )}
+                    </div>
                     <span className="category-section__subcount">{subImages.length}</span>
                   </div>
                 </InView>

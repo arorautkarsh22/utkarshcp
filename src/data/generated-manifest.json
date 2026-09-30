@@ -529,5 +529,27 @@
       "instagram": true,
       "isBrochure": false
     }
+  ],
+  "web-development": [
+    {
+      "id": "sge_real_estates_sgereal_admin_view",
+      "full": "designs/web-development/sge_real_estates_sgereal_admin_view.webp",
+      "thumb": "designs/web-development/thumbs/sge_real_estates_sgereal_admin_view.webp",
+      "original": "designs/web-development/originals/sge_real_estates_sgereal_admin_view.jpg",
+      "title": "sgereal admin view",
+      "subcategory": "SGE Real Estates",
+      "instagram": false,
+      "isBrochure": false
+    },
+    {
+      "id": "sge_real_estates_sgereal_user_view",
+      "full": "designs/web-development/sge_real_estates_sgereal_user_view.webp",
+      "thumb": "designs/web-development/thumbs/sge_real_estates_sgereal_user_view.webp",
+      "original": "designs/web-development/originals/sge_real_estates_sgereal_user_view.jpg",
+      "title": "sgereal user view",
+      "subcategory": "SGE Real Estates",
+      "instagram": false,
+      "isBrochure": false
+    }
   ]
 }

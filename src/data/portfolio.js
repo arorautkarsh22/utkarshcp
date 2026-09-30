@@ -28,6 +28,11 @@ export const CATEGORIES = [
     title: 'Socials',
     subtitle: 'Social media graphics and digital campaigns',
   },
+  {
+    id: 'web-development',
+    title: 'Web Development (UI/UX)',
+    subtitle: 'User interfaces and digital experiences',
+  },
 ];
 
 export function getPortfolioData() {
