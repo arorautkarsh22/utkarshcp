@@ -8,7 +8,7 @@ const CONTACT_LINKS = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/utkarsh-arora-/',
+    href: 'https://www.linkedin.com/in/arora-utkarsh/',
   },
   {
     icon: Mail,
