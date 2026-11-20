@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, lazy, Suspense } from 'react';
 
 import Hero from './components/Hero';
 import About from './components/About';
+import DynamicFlareBackground from './components/DynamicFlareBackground';
 import CategorySection from './components/CategorySection';
 import Lightbox from './components/Lightbox';
 import Footer from './components/Footer';
@@ -117,8 +118,11 @@ export default function App() {
 
   return (
     <div className="app">
-      <Hero />
-      <About />
+      <div className="hero-about-zone">
+        <DynamicFlareBackground />
+        <Hero />
+        <About />
+      </div>
 
       <main>
         {visibleSections.map((sec) => {

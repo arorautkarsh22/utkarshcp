@@ -49,14 +49,6 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero">
-      {/* Ambient background effects */}
-      <div className="hero__bg">
-        <div className="hero__orb hero__orb--1" />
-        <div className="hero__orb hero__orb--2" />
-        <div className="hero__orb hero__orb--3" />
-        <div className="hero__grain" />
-      </div>
-
       <div className="hero__content container">
         <motion.div
           className="hero__badge"
