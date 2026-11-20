@@ -40,6 +40,7 @@ import {
   FileText,
   Smartphone,
 } from 'lucide-react';
+import AdminMediaViewer from './AdminMediaViewer';
 import './AdminPanel.css';
 
 export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPortfolioChanged }) {
@@ -80,6 +81,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
 
   // Filters for photos view
   const [photoFilterSection, setPhotoFilterSection] = useState('all');
+  const [viewerIndex, setViewerIndex] = useState(null);
 
   useEffect(() => {
     loadAllData();
@@ -1078,18 +1080,30 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                   <p>No media found in this filter. Click <strong>Upload Media</strong> above.</p>
                 </div>
               ) : (
-                displayedPhotos.map((photo) => (
-                  <div key={photo.id} className="admin-photo-card glass-card">
+                displayedPhotos.map((photo, idx) => (
+                  <div
+                    key={photo.id}
+                    className="admin-photo-card glass-card is-clickable"
+                    onClick={() => setViewerIndex(idx)}
+                    title="Click to view media"
+                  >
                     <div className="admin-photo-thumb-wrap">
                       <img
                         src={photo.thumb || photo.thumb_url || photo.full || photo.image_url}
                         alt={photo.title}
                         loading="lazy"
                       />
+                      <div className="admin-photo-hover-hint">
+                        <Eye size={18} />
+                        <span>Preview</span>
+                      </div>
                       <button
                         type="button"
                         className="admin-photo-delete-overlay"
-                        onClick={() => handleDeletePhoto(photo)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeletePhoto(photo);
+                        }}
                         title="Delete photo"
                       >
                         <Trash2 size={16} />
@@ -1119,6 +1133,24 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                 ))
               )}
             </div>
+
+            {/* Media Lightbox Viewer Modal */}
+            {viewerIndex !== null && displayedPhotos[viewerIndex] && (
+              <AdminMediaViewer
+                photo={displayedPhotos[viewerIndex]}
+                onClose={() => setViewerIndex(null)}
+                onNext={() => setViewerIndex((prev) => Math.min(prev + 1, displayedPhotos.length - 1))}
+                onPrev={() => setViewerIndex((prev) => Math.max(prev - 1, 0))}
+                hasNext={viewerIndex < displayedPhotos.length - 1}
+                hasPrev={viewerIndex > 0}
+                currentIndex={viewerIndex}
+                totalCount={displayedPhotos.length}
+                onDelete={(p) => {
+                  handleDeletePhoto(p);
+                  setViewerIndex(null);
+                }}
+              />
+            )}
           </div>
         )}
       </main>
