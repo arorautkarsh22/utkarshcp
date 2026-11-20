@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Linkedin, Mail, Phone, Github, Heart, Lock } from 'lucide-react';
+import { Linkedin, Mail, Github, Lock } from 'lucide-react';
 import './Footer.css';
 
 const SOCIAL_LINKS = [
@@ -36,19 +36,8 @@ export default function Footer() {
                 <Icon size={18} />
               </motion.a>
             ))}
-          </div>
-        </div>
-
-        <div className="footer__bottom">
-          <p className="footer__copyright">
-            © {new Date().getFullYear()} Utkarsh Arora. All rights reserved.
-          </p>
-          <div className="footer__bottom-right">
-            <p className="footer__made-with">
-              Made with <Heart size={12} className="footer__heart" /> and creativity
-            </p>
-            <a href="#admin" className="footer__admin-link" title="Admin Studio">
-              <Lock size={12} />
+            <a href="#admin" className="footer__social-link footer__admin-link" title="Admin Studio" aria-label="Admin Studio">
+              <Lock size={16} />
             </a>
           </div>
         </div>
