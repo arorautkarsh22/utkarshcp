@@ -1,24 +1,10 @@
 import { motion } from 'motion/react';
-import { Sparkles } from 'lucide-react';
 import { InView } from './motion-primitives';
 import './About.css';
 
 export default function About() {
   return (
     <section className="about-section" id="about">
-      {/* Decorative Section Separator between Hero and About */}
-      <div className="section-separator-container">
-        <div className="section-separator">
-          <div className="section-separator__line section-separator__line--left" />
-          <div className="section-separator__badge">
-            <Sparkles size={13} className="section-separator__icon" />
-            <span>About</span>
-          </div>
-          <div className="section-separator__line section-separator__line--right" />
-          <div className="section-separator__glow" />
-        </div>
-      </div>
-
       <div className="about-section__container">
         <InView
           variants={{
@@ -27,7 +13,7 @@ export default function About() {
           }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="about-section__card glass-card">
+          <div className="about-section__card">
             <div className="about-section__content">
               <h2 className="about-section__title">About Me</h2>
               <p className="about-section__desc">
