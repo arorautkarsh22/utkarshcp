@@ -153,6 +153,9 @@ export default function Hero() {
           </div>
         </motion.button>
       </div>
+
+      {/* Subtle bottom transition gradient */}
+      <div className="hero__bottom-fade" />
     </section>
   );
 }

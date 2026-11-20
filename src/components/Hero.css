@@ -255,3 +255,14 @@
   border-color: var(--color-border-accent);
   background: var(--color-bg-tertiary);
 }
+
+.hero__bottom-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, var(--color-bg-primary));
+  pointer-events: none;
+  z-index: 2;
+}
