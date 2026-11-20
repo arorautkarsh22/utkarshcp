@@ -60,9 +60,9 @@ export default function Hero() {
       <div className="hero__content container">
         <motion.div
           className="hero__badge"
-          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          initial={{ opacity: 0, y: 10, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.3, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
         >
           <Sparkles size={14} />
           <span>Creative Design Portfolio</span>
@@ -71,8 +71,8 @@ export default function Hero() {
         <h1 className="hero__title">
           <TextEffect
             per="char"
-            preset="blur-in"
-            delay={1.0}
+            preset="fade-in-up"
+            delay={0.1}
             trigger={loaded}
             className="hero__name"
           >
@@ -90,8 +90,8 @@ export default function Hero() {
 
         <TextEffect
           per="word"
-          preset="blur-in"
-          delay={1.6}
+          preset="fade-in-up"
+          delay={0.2}
           trigger={loaded}
           className="hero__description"
           as="p"
@@ -101,9 +101,9 @@ export default function Hero() {
 
         <motion.div
           className="hero__contacts"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
           {CONTACT_LINKS.map(({ icon: Icon, label, href }) => (
             <a
@@ -122,9 +122,9 @@ export default function Hero() {
         {/* Tools section */}
         <motion.div
           className="hero__tools"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.35, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           <span className="hero__tools-label">Tools I Use</span>
           <div className="hero__tools-list">
@@ -144,7 +144,7 @@ export default function Hero() {
           onClick={scrollToWork}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 2.4 }}
+          transition={{ duration: 0.35, delay: 0.35 }}
           aria-label="Scroll to work"
         >
           <span className="hero__scroll-text">View My Work</span>

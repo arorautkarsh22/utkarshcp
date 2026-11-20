@@ -36,6 +36,13 @@ function ImageCard({ image, index, onClick }) {
   const [loaded, setLoaded] = useState(false);
   const [hovered, setHovered] = useState(false);
   const cardRef = useRef(null);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setLoaded(true);
+    }
+  }, []);
 
   return (
     <motion.div
@@ -45,7 +52,7 @@ function ImageCard({ image, index, onClick }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       whileHover={{ y: -4 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
@@ -54,6 +61,7 @@ function ImageCard({ image, index, onClick }) {
       <div className="image-card__image-wrapper">
         {!loaded && <div className="image-card__skeleton" />}
         <img
+          ref={imgRef}
           src={image.thumb}
           alt={image.title}
           className={`image-card__image ${loaded ? 'image-card__image--loaded' : ''}`}
@@ -82,6 +90,13 @@ function BrochureCard({ image, onClick }) {
   const [hovered, setHovered] = useState(false);
   const [pageIndex, setPageIndex] = useState(0);
   const cardRef = useRef(null);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setLoaded(true);
+    }
+  }, [pageIndex]);
 
   // Auto slideshow effect
   useEffect(() => {
@@ -91,7 +106,6 @@ function BrochureCard({ image, onClick }) {
         setPageIndex((prev) => (prev + 1) % image.pages.length);
       }, 1200);
     } else {
-      // Reset to front page when not hovered (optional, or keep where it was)
       setPageIndex(0);
     }
     return () => clearInterval(interval);
@@ -108,7 +122,7 @@ function BrochureCard({ image, onClick }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       whileHover={{ y: -4 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
@@ -117,6 +131,7 @@ function BrochureCard({ image, onClick }) {
       <div className="image-card__image-wrapper">
         {!loaded && <div className="image-card__skeleton" />}
         <img
+          ref={imgRef}
           src={currentPage.thumb}
           alt={`${image.title} - Page ${pageIndex + 1}`}
           className={`image-card__image ${loaded ? 'image-card__image--loaded' : ''}`}
@@ -124,7 +139,7 @@ function BrochureCard({ image, onClick }) {
           decoding="async"
           onLoad={() => setLoaded(true)}
           draggable={false}
-          style={{ transition: 'opacity 0.3s ease' }}
+          style={{ transition: 'opacity 0.25s ease' }}
         />
         
         <div className="brochure-card__badge">

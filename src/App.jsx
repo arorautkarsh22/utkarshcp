@@ -1,18 +1,20 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, lazy, Suspense } from 'react';
 
 import Hero from './components/Hero';
 import About from './components/About';
 import CategorySection from './components/CategorySection';
 import Lightbox from './components/Lightbox';
 import Footer from './components/Footer';
-import AdminPanel from './components/Admin/AdminPanel';
-import AdminLogin from './components/Admin/AdminLogin';
 import { supabase } from './lib/supabase';
 import { getSections } from './services/sectionsService';
+import { getMergedPortfolioData } from './services/portfolioService';
 import { CATEGORIES as INITIAL_CATEGORIES, getPortfolioData } from './data/portfolio';
 import './App.css';
 
-const portfolioData = getPortfolioData();
+const AdminPanel = lazy(() => import('./components/Admin/AdminPanel'));
+const AdminLogin = lazy(() => import('./components/Admin/AdminLogin'));
+
+const initialPortfolioData = getPortfolioData();
 
 export default function App() {
   const [sections, setSections] = useState(
@@ -24,6 +26,7 @@ export default function App() {
       visible: true,
     }))
   );
+  const [portfolioData, setPortfolioData] = useState(initialPortfolioData);
   const [user, setUser] = useState(null);
   const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [lightbox, setLightbox] = useState(null);
@@ -52,11 +55,17 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Fetch dynamic sections from Supabase on load
+  // Fetch dynamic sections & merged photos on load
   useEffect(() => {
     getSections().then((data) => {
       if (data && data.length > 0) {
         setSections(data);
+      }
+    });
+
+    getMergedPortfolioData().then((data) => {
+      if (data && Object.keys(data).length > 0) {
+        setPortfolioData(data);
       }
     });
   }, []);
@@ -81,24 +90,26 @@ export default function App() {
 
   // Admin Studio Routing
   if (currentHash === '#admin') {
-    if (user) {
-      return (
-        <AdminPanel
-          user={user}
-          onBackToSite={() => {
-            window.location.hash = '';
-          }}
-          onSectionsChanged={(updated) => setSections(updated)}
-        />
-      );
-    }
     return (
-      <AdminLogin
-        onLoginSuccess={(authedUser) => setUser(authedUser)}
-        onBackToSite={() => {
-          window.location.hash = '';
-        }}
-      />
+      <Suspense fallback={<div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a0a0b8' }}>Loading Admin Portal...</div>}>
+        {user ? (
+          <AdminPanel
+            user={user}
+            onBackToSite={() => {
+              window.location.hash = '';
+            }}
+            onSectionsChanged={(updated) => setSections(updated)}
+            onPortfolioChanged={(updated) => setPortfolioData(updated)}
+          />
+        ) : (
+          <AdminLogin
+            onLoginSuccess={(authedUser) => setUser(authedUser)}
+            onBackToSite={() => {
+              window.location.hash = '';
+            }}
+          />
+        )}
+      </Suspense>
     );
   }
 

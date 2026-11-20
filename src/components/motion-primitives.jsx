@@ -2,17 +2,18 @@ import { useRef, useEffect, useState } from 'react';
 import { motion, useInView as useMotionInView } from 'motion/react';
 
 /**
- * InView — Triggers animations when element enters viewport
- * Inspired by motion-primitives InView component
+ * InView — Triggers animations when element enters viewport.
+ * Uses rootMargin: '200px 0px 200px 0px' so content pre-renders
+ * before the user scrolls directly onto it.
  */
 export function InView({
   children,
   variants = {
-    hidden: { opacity: 0, y: 30, filter: 'blur(4px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
   },
-  transition = { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
-  viewOptions = { once: true, amount: 0.1 },
+  transition = { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+  viewOptions = { once: true, margin: '200px 0px 200px 0px' },
   as: Component = 'div',
   className,
   style,
@@ -38,8 +39,8 @@ export function InView({
 }
 
 /**
- * AnimatedGroup — Staggered animations for groups of children
- * Inspired by motion-primitives AnimatedGroup component
+ * AnimatedGroup — Staggered animations for groups of children.
+ * Optimized with pre-scroll triggers and reduced stagger delays.
  */
 export function AnimatedGroup({
   children,
@@ -50,18 +51,17 @@ export function AnimatedGroup({
       visible: {
         opacity: 1,
         transition: {
-          staggerChildren: 0.08,
-          delayChildren: 0.1,
+          staggerChildren: 0.02,
+          delayChildren: 0.02,
         },
       },
     },
     item: {
-      hidden: { opacity: 0, y: 24, filter: 'blur(4px)' },
+      hidden: { opacity: 0, y: 15 },
       visible: {
         opacity: 1,
         y: 0,
-        filter: 'blur(0px)',
-        transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
       },
     },
   },
@@ -71,38 +71,38 @@ export function AnimatedGroup({
     'fade-in-up': {
       container: {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+        visible: { opacity: 1, transition: { staggerChildren: 0.02 } },
       },
       item: {
-        hidden: { opacity: 0, y: 30 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+        hidden: { opacity: 0, y: 15 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
       },
     },
     'scale-up': {
       container: {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
+        visible: { opacity: 1, transition: { staggerChildren: 0.02 } },
       },
       item: {
-        hidden: { opacity: 0, scale: 0.9 },
-        visible: { opacity: 1, scale: 1, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } },
+        hidden: { opacity: 0, scale: 0.98 },
+        visible: { opacity: 1, scale: 1, transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } },
       },
     },
     'blur-in': {
       container: {
         hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+        visible: { opacity: 1, transition: { staggerChildren: 0.02 } },
       },
       item: {
-        hidden: { opacity: 0, filter: 'blur(12px)' },
-        visible: { opacity: 1, filter: 'blur(0px)', transition: { duration: 0.6 } },
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.3 } },
       },
     },
   };
 
   const activeVariants = preset ? presets[preset] || variants : variants;
   const ref = useRef(null);
-  const isInView = useMotionInView(ref, { once: true, amount: 0.1 });
+  const isInView = useMotionInView(ref, { once: true, margin: '200px 0px 200px 0px' });
 
   return (
     <motion.div
@@ -126,7 +126,6 @@ export function AnimatedGroup({
 
 /**
  * TextEffect — Animated text with per-character or per-word animations
- * Inspired by motion-primitives TextEffect component
  */
 export function TextEffect({
   children,
@@ -138,102 +137,59 @@ export function TextEffect({
   trigger = true,
 }) {
   const text = typeof children === 'string' ? children : '';
+  const elements = per === 'char' ? text.split('') : text.split(' ');
 
-  const presets = {
-    'fade-in-up': {
-      hidden: { opacity: 0, y: 16, filter: 'blur(4px)' },
-      visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
-    },
-    'fade-in': {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1 },
-    },
-    'blur-in': {
-      hidden: { opacity: 0, filter: 'blur(12px)' },
-      visible: { opacity: 1, filter: 'blur(0px)' },
-    },
-    'slide-up': {
-      hidden: { opacity: 0, y: 24 },
-      visible: { opacity: 1, y: 0 },
-    },
-    'slide-down': {
-      hidden: { opacity: 0, y: -24 },
-      visible: { opacity: 1, y: 0 },
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: per === 'char' ? 0.015 : 0.04,
+        delayChildren: delay,
+      },
     },
   };
 
-  const variants = presets[preset] || presets['fade-in-up'];
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 10,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.25,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
 
-  const segments = per === 'char'
-    ? text.split('')
-    : text.split(' ');
+  const MotionComponent = motion.create(Component);
 
   return (
-    <Component className={className} style={{ display: 'inline' }}>
-      <motion.span
-        initial="hidden"
-        animate={trigger ? 'visible' : 'hidden'}
-        transition={{
-          staggerChildren: per === 'char' ? 0.025 : 0.06,
-          delayChildren: delay,
-        }}
-        style={{ display: 'inline' }}
-      >
-        {segments.map((segment, i) => (
-          <motion.span
-            key={`${segment}-${i}`}
-            variants={variants}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              display: 'inline-block',
-              whiteSpace: per === 'char' ? 'pre' : 'normal',
-            }}
-          >
-            {segment}
-            {per === 'word' && i < segments.length - 1 ? '\u00A0' : ''}
-          </motion.span>
-        ))}
-      </motion.span>
-    </Component>
+    <MotionComponent
+      className={className}
+      variants={containerVariants}
+      initial="hidden"
+      animate={trigger ? 'visible' : 'hidden'}
+      aria-label={text}
+    >
+      {elements.map((el, i) => (
+        <motion.span
+          key={i}
+          variants={itemVariants}
+          style={{ display: 'inline-block', whiteSpace: 'pre' }}
+        >
+          {el}{per === 'word' && i < elements.length - 1 ? ' ' : ''}
+        </motion.span>
+      ))}
+    </MotionComponent>
   );
 }
 
 /**
- * TransitionPanel — Animated panel transitions for content switching
- * Inspired by motion-primitives TransitionPanel component
- */
-export function TransitionPanel({
-  children,
-  activeIndex = 0,
-  className,
-  transition = { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
-  variants = {
-    enter: { opacity: 0, y: 12, filter: 'blur(4px)' },
-    center: { opacity: 1, y: 0, filter: 'blur(0px)' },
-    exit: { opacity: 0, y: -12, filter: 'blur(4px)' },
-  },
-}) {
-  const childArray = Array.isArray(children) ? children : [children];
-  const activeChild = childArray[activeIndex];
-
-  return (
-    <div className={className} style={{ position: 'relative', overflow: 'hidden' }}>
-      <motion.div
-        key={activeIndex}
-        initial="enter"
-        animate="center"
-        exit="exit"
-        variants={variants}
-        transition={transition}
-      >
-        {activeChild}
-      </motion.div>
-    </div>
-  );
-}
-
-/**
- * TextLoop — Cycles through text values with animation
+ * TextLoop — Cycles through an array of text elements
  */
 export function TextLoop({
   children,
@@ -241,10 +197,11 @@ export function TextLoop({
   className,
   transition = { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
 }) {
-  const items = Array.isArray(children) ? children : [children];
   const [index, setIndex] = useState(0);
+  const items = Array.isArray(children) ? children : [children];
 
   useEffect(() => {
+    if (items.length <= 1) return;
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % items.length);
     }, interval);
@@ -255,9 +212,9 @@ export function TextLoop({
     <span className={className} style={{ display: 'inline-block', position: 'relative' }}>
       <motion.span
         key={index}
-        initial={{ opacity: 0, y: 16, filter: 'blur(4px)' }}
-        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-        exit={{ opacity: 0, y: -16, filter: 'blur(4px)' }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
         transition={transition}
         style={{ display: 'inline-block' }}
       >

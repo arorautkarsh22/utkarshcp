@@ -28,14 +28,14 @@
 .image-card__skeleton {
   position: absolute;
   inset: 0;
-  background: transparent;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
 }
 
 .image-card__image {
@@ -43,7 +43,7 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity var(--duration-slow) ease, transform var(--duration-slow) var(--ease-out-expo);
+  transition: opacity 0.25s ease, transform var(--duration-slow) var(--ease-out-expo);
 }
 
 .image-card__image--loaded {
