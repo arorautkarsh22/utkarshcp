@@ -20,6 +20,41 @@ const DEFAULT_COMPANIES = [
   { id: 'webdev-sge', section_id: 'web-development', name: 'SGE Real Estates', sort_order: 1 },
 ];
 
+const CDN_BASE = 'https://hqhuxfhommtkcvulruqr.supabase.co/storage/v1/object/public/portfolio-media/';
+
+/**
+ * Synchronous initial portfolio data using local manifest mapped to Supabase CDN URLs.
+ * Ensures instant first paint with zero blank elements while Supabase syncs in background.
+ */
+export function getInitialPortfolioData() {
+  const result = {};
+  for (const [secId, items] of Object.entries(manifest)) {
+    result[secId] = items.map((it, idx) => {
+      const p0 = it.pages?.[0];
+      const rawFull = it.full || p0?.full || '';
+      const rawThumb = it.thumb || p0?.thumb || rawFull;
+      const fullUrl = rawFull.startsWith('http') ? rawFull : `${CDN_BASE}${rawFull}`;
+      const thumbUrl = rawThumb.startsWith('http') ? rawThumb : `${CDN_BASE}${rawThumb}`;
+      return {
+        ...it,
+        section_id: secId,
+        full: fullUrl,
+        thumb: thumbUrl,
+        original: fullUrl,
+        sort_order: it.sort_order || idx + 1,
+        pages: it.pages
+          ? it.pages.map((p) => ({
+              ...p,
+              full: p.full.startsWith('http') ? p.full : `${CDN_BASE}${p.full}`,
+              thumb: p.thumb.startsWith('http') ? p.thumb : `${CDN_BASE}${p.thumb}`,
+            }))
+          : null,
+      };
+    });
+  }
+  return result;
+}
+
 /**
  * Fetch all companies, with section mapping
  */

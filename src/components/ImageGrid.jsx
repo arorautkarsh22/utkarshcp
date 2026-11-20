@@ -42,7 +42,12 @@ function ImageCard({ image, index, onClick }) {
     if (imgRef.current && imgRef.current.complete) {
       setLoaded(true);
     }
-  }, []);
+    // Safety fallback: ensure image is visible even if browser caches without firing onLoad
+    const timer = setTimeout(() => {
+      setLoaded(true);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [image.thumb]);
 
   return (
     <motion.div
@@ -68,6 +73,7 @@ function ImageCard({ image, index, onClick }) {
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
           draggable={false}
         />
         <div className={`image-card__overlay ${hovered ? 'image-card__overlay--visible' : ''}`}>
@@ -96,7 +102,11 @@ function BrochureCard({ image, onClick }) {
     if (imgRef.current && imgRef.current.complete) {
       setLoaded(true);
     }
-  }, [pageIndex]);
+    const timer = setTimeout(() => {
+      setLoaded(true);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [pageIndex, image.id]);
 
   // Auto slideshow effect
   useEffect(() => {
@@ -138,6 +148,7 @@ function BrochureCard({ image, onClick }) {
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
           draggable={false}
           style={{ transition: 'opacity 0.25s ease' }}
         />

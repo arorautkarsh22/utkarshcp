@@ -7,8 +7,8 @@ import Lightbox from './components/Lightbox';
 import Footer from './components/Footer';
 import { supabase } from './lib/supabase';
 import { getSections } from './services/sectionsService';
-import { getMergedPortfolioData } from './services/portfolioService';
-import { CATEGORIES as INITIAL_CATEGORIES, getPortfolioData } from './data/portfolio';
+import { getMergedPortfolioData, getInitialPortfolioData } from './services/portfolioService';
+import { CATEGORIES as INITIAL_CATEGORIES } from './data/portfolio';
 import './App.css';
 
 const AdminPanel = lazy(() => import('./components/Admin/AdminPanel'));
@@ -24,7 +24,8 @@ export default function App() {
       visible: true,
     }))
   );
-  const [portfolioData, setPortfolioData] = useState({});
+  // Initialize synchronously with cached manifest & Supabase CDN URLs so page is never blank
+  const [portfolioData, setPortfolioData] = useState(() => getInitialPortfolioData());
   const [user, setUser] = useState(null);
   const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [lightbox, setLightbox] = useState(null);

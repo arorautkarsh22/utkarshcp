@@ -20,6 +20,21 @@ export function InView({
 }) {
   const ref = useRef(null);
   const isInView = useMotionInView(ref, viewOptions);
+  const [hasTriggered, setHasTriggered] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      setHasTriggered(true);
+    }
+  }, [isInView]);
+
+  // Fail-safe: ensure content is never stuck at opacity 0 if observer misses
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasTriggered(true);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   const MotionComponent = motion.create(Component);
 
@@ -27,7 +42,7 @@ export function InView({
     <MotionComponent
       ref={ref}
       initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
+      animate={isInView || hasTriggered ? 'visible' : 'hidden'}
       variants={variants}
       transition={transition}
       className={className}
@@ -103,6 +118,21 @@ export function AnimatedGroup({
   const activeVariants = preset ? presets[preset] || variants : variants;
   const ref = useRef(null);
   const isInView = useMotionInView(ref, { once: true, margin: '200px 0px 200px 0px' });
+  const [hasTriggered, setHasTriggered] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      setHasTriggered(true);
+    }
+  }, [isInView]);
+
+  // Fail-safe: ensure content is never stuck at opacity 0
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setHasTriggered(true);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <motion.div
@@ -110,7 +140,7 @@ export function AnimatedGroup({
       className={className}
       variants={activeVariants.container}
       initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
+      animate={isInView || hasTriggered ? 'visible' : 'hidden'}
     >
       {Array.isArray(children)
         ? children.map((child, i) => (
