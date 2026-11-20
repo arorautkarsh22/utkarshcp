@@ -1,5 +1,5 @@
-import { supabase } from '../lib/supabase';
-import manifest from '../data/generated-manifest.json';
+import { supabase } from '../lib/supabase.js';
+import manifest from '../data/generated-manifest.json' with { type: 'json' };
 
 // Default initial companies from manifest
 const DEFAULT_COMPANIES = [
@@ -90,41 +90,48 @@ export async function getMergedPortfolioData() {
       deletedIds = new Set(delData.map((d) => d.id));
     }
 
-    // 2. Fetch new custom portfolio items from Supabase
-    const { data: customData } = await supabase.from('portfolio_items').select('*');
-    if (customData) {
+    // 2. Fetch portfolio items from Supabase
+    const { data: customData } = await supabase
+      .from('portfolio_items')
+      .select('*')
+      .order('created_at', { ascending: true });
+
+    if (customData && customData.length > 0) {
       supabaseItems = customData;
     }
   } catch (err) {
     console.warn('Could not sync with Supabase items, using local manifest:', err);
   }
 
-  // Clone local manifest and filter out deleted photos
+  // If Supabase has items, build directly from Supabase!
+  if (supabaseItems.length > 0) {
+    const result = {};
+    for (const item of supabaseItems) {
+      if (deletedIds.has(item.id)) continue;
+      if (!result[item.section_id]) result[item.section_id] = [];
+
+      const imgUrl = item.image_url || item.full;
+      result[item.section_id].push({
+        id: item.id,
+        title: item.title,
+        subcategory: item.subcategory,
+        full: imgUrl,
+        thumb: item.thumb_url || item.thumb || imgUrl,
+        original: imgUrl,
+        instagram: Boolean(item.is_instagram),
+        isBrochure: Boolean(item.is_brochure),
+        pages: item.pages || null,
+        isCustom: true,
+      });
+    }
+    return result;
+  }
+
+  // Fallback to local manifest if Supabase is empty or unreachable
   const result = {};
   for (const [secId, items] of Object.entries(manifest)) {
     result[secId] = items.filter((item) => !deletedIds.has(item.id));
   }
-
-  // Append Supabase items to their respective section
-  supabaseItems.forEach((item) => {
-    if (!deletedIds.has(item.id)) {
-      if (!result[item.section_id]) {
-        result[item.section_id] = [];
-      }
-      result[item.section_id].unshift({
-        id: item.id,
-        title: item.title,
-        subcategory: item.subcategory,
-        full: item.full,
-        thumb: item.thumb || item.full,
-        original: item.full,
-        instagram: item.is_instagram || false,
-        isBrochure: item.is_brochure || false,
-        isCustom: true,
-      });
-    }
-  });
-
   return result;
 }
 
@@ -178,8 +185,8 @@ export async function uploadAndAddPhoto({
         section_id: sectionId,
         subcategory: subcategory?.trim() || 'Misc',
         title: title.trim(),
-        full: finalUrl,
-        thumb: finalUrl,
+        image_url: finalUrl,
+        thumb_url: finalUrl,
         is_instagram: isInstagram,
         is_brochure: isBrochure,
       },

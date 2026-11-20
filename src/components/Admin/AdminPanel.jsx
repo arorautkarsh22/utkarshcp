@@ -974,7 +974,11 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                 displayedPhotos.map((photo) => (
                   <div key={photo.id} className="admin-photo-card glass-card">
                     <div className="admin-photo-thumb-wrap">
-                      <img src={photo.thumb || photo.full} alt={photo.title} loading="lazy" />
+                      <img
+                        src={photo.thumb || photo.thumb_url || photo.full || photo.image_url}
+                        alt={photo.title}
+                        loading="lazy"
+                      />
                       <button
                         type="button"
                         className="admin-photo-delete-overlay"

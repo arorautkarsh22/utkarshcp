@@ -14,8 +14,6 @@ import './App.css';
 const AdminPanel = lazy(() => import('./components/Admin/AdminPanel'));
 const AdminLogin = lazy(() => import('./components/Admin/AdminLogin'));
 
-const initialPortfolioData = getPortfolioData();
-
 export default function App() {
   const [sections, setSections] = useState(
     INITIAL_CATEGORIES.map((cat, idx) => ({
@@ -26,7 +24,7 @@ export default function App() {
       visible: true,
     }))
   );
-  const [portfolioData, setPortfolioData] = useState(initialPortfolioData);
+  const [portfolioData, setPortfolioData] = useState({});
   const [user, setUser] = useState(null);
   const [currentHash, setCurrentHash] = useState(window.location.hash);
   const [lightbox, setLightbox] = useState(null);

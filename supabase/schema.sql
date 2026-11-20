@@ -91,8 +91,8 @@ create table if not exists public.portfolio_items (
   section_id text not null references public.sections(id) on delete cascade,
   subcategory text not null default 'Misc',
   title text not null,
-  full text not null,
-  thumb text not null,
+  image_url text not null,
+  thumb_url text not null,
   is_instagram boolean not null default false,
   is_brochure boolean not null default false,
   created_at timestamptz not null default now()

@@ -1,4 +1,5 @@
-# Logs
+# Local migration scripts
+scripts/migrate-to-supabase.mjs
 logs
 *.log
 npm-debug.log*
