@@ -136,24 +136,86 @@ export async function getMergedPortfolioData() {
 }
 
 /**
- * Upload a photo to Supabase Storage and create a portfolio item record
+ * Upload a photo or multi-page brochure/poster to Supabase Storage and create a portfolio item record
  */
 export async function uploadAndAddPhoto({
   file,
+  files = [],
   imageUrl,
   sectionId,
   subcategory,
   title,
+  mediaType = 'poster', // 'poster' | 'brochure' | 'instagram' | 'standard'
   isInstagram = false,
   isBrochure = false,
 }) {
+  const isBrochureType = isBrochure || mediaType === 'brochure' || (files && files.length > 1);
+  const isInstagramType = isInstagram || mediaType === 'instagram';
+
+  // Handle multi-page brochure upload
+  if (isBrochureType && files && files.length > 0) {
+    const pages = [];
+    for (let i = 0; i < files.length; i++) {
+      const pageFile = files[i];
+      const fileExt = pageFile.name.split('.').pop();
+      const fileName = `${sectionId}/${Date.now()}-page-${i + 1}-${Math.random().toString(36).substring(2, 6)}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('portfolio-media')
+        .upload(fileName, pageFile, {
+          cacheControl: '3600',
+          upsert: false,
+        });
+
+      if (uploadError) {
+        throw new Error(`Failed to upload page ${i + 1}: ${uploadError.message}`);
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from('portfolio-media')
+        .getPublicUrl(fileName);
+
+      pages.push({
+        full: publicUrlData.publicUrl,
+        thumb: publicUrlData.publicUrl,
+        original: publicUrlData.publicUrl,
+        title: `${title} - Page ${i + 1}`,
+      });
+    }
+
+    const itemId = `brochure-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+    const { data, error } = await supabase
+      .from('portfolio_items')
+      .insert([
+        {
+          id: itemId,
+          section_id: sectionId,
+          subcategory: subcategory?.trim() || 'Misc',
+          title: title.trim(),
+          image_url: pages[0].full,
+          thumb_url: pages[0].thumb,
+          is_instagram: false,
+          is_brochure: true,
+          pages: pages,
+        },
+      ])
+      .select();
+
+    if (error) {
+      throw new Error(`Failed to save brochure: ${error.message}`);
+    }
+
+    return data?.[0];
+  }
+
+  // Handle single file (Poster, Logo, Clothing, Socials)
   let finalUrl = imageUrl;
 
   if (file) {
     const fileExt = file.name.split('.').pop();
     const fileName = `${sectionId}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('portfolio-media')
       .upload(fileName, file, {
         cacheControl: '3600',
@@ -175,7 +237,7 @@ export async function uploadAndAddPhoto({
     throw new Error('Please select an image file or provide an image URL.');
   }
 
-  const itemId = `photo-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+  const itemId = `${mediaType || 'photo'}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
 
   const { data, error } = await supabase
     .from('portfolio_items')
@@ -187,8 +249,9 @@ export async function uploadAndAddPhoto({
         title: title.trim(),
         image_url: finalUrl,
         thumb_url: finalUrl,
-        is_instagram: isInstagram,
-        is_brochure: isBrochure,
+        is_instagram: isInstagramType,
+        is_brochure: false,
+        pages: null,
       },
     ])
     .select();

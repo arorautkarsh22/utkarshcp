@@ -738,6 +738,7 @@
 .admin-photo-meta-tags {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 4px;
 }
 
@@ -747,6 +748,78 @@
   background: rgba(255, 255, 255, 0.05);
   padding: 0.1rem 0.35rem;
   border-radius: 4px;
+}
+
+.admin-photo-tag.poster {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  font-weight: 600;
+}
+
+.admin-photo-tag.brochure {
+  color: #c084fc;
+  background: rgba(192, 132, 252, 0.12);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  font-weight: 600;
+}
+
+.admin-photo-tag.insta {
+  color: #f472b6;
+  background: rgba(244, 114, 182, 0.12);
+  border: 1px solid rgba(244, 114, 182, 0.25);
+}
+
+.admin-filter-pill.poster.is-active {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.admin-filter-pill.brochure.is-active {
+  background: rgba(192, 132, 252, 0.15);
+  border-color: #c084fc;
+  color: #c084fc;
+}
+
+.admin-media-type-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.admin-type-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.45rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-type-pill:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--color-text-primary);
+}
+
+.admin-type-pill.is-active {
+  background: rgba(232, 168, 124, 0.15);
+  border-color: var(--color-accent-1);
+  color: var(--color-accent-1);
+}
+
+.admin-preview-page-tag {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-text-tertiary);
+  margin-top: 4px;
 }
 
 .admin-photo-custom-tag {

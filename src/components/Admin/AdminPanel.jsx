@@ -36,6 +36,9 @@ import {
   AlertCircle,
   UploadCloud,
   ExternalLink,
+  BookOpen,
+  FileText,
+  Smartphone,
 } from 'lucide-react';
 import './AdminPanel.css';
 
@@ -65,10 +68,12 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
 
   // --- PHOTOS FORM STATE ---
   const [showAddPhotoForm, setShowAddPhotoForm] = useState(false);
-  const [photoSectionId, setPhotoSectionId] = useState('');
+  const [photoMediaType, setPhotoMediaType] = useState('poster'); // 'poster' | 'brochure' | 'instagram' | 'standard'
+  const [photoSectionId, setPhotoSectionId] = useState('brochures-posters');
   const [photoCompany, setPhotoCompany] = useState('');
   const [photoTitle, setPhotoTitle] = useState('');
   const [photoFile, setPhotoFile] = useState(null);
+  const [photoFiles, setPhotoFiles] = useState([]);
   const [photoPreview, setPhotoPreview] = useState(null);
   const [photoExternalUrl, setPhotoExternalUrl] = useState('');
   const [photoIsInstagram, setPhotoIsInstagram] = useState(false);
@@ -100,7 +105,8 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
 
       if (secData.length > 0) {
         setCompanySectionId(secData[0].id);
-        setPhotoSectionId(secData[0].id);
+        const hasBp = secData.some((s) => s.id === 'brochures-posters');
+        setPhotoSectionId(hasBp ? 'brochures-posters' : secData[0].id);
       }
 
       if (onSectionsChanged) onSectionsChanged(secData);
@@ -297,10 +303,29 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
 
   // --- PHOTOS ACTIONS ---
   const handleFileSelect = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setPhotoFile(file);
-      setPhotoPreview(URL.createObjectURL(file));
+    if (photoMediaType === 'brochure') {
+      const files = Array.from(e.target.files || []);
+      setPhotoFiles(files);
+      if (files.length > 0) {
+        setPhotoPreview(URL.createObjectURL(files[0]));
+      }
+    } else {
+      const file = e.target.files?.[0];
+      if (file) {
+        setPhotoFile(file);
+        setPhotoPreview(URL.createObjectURL(file));
+      }
+    }
+  };
+
+  const handleMediaTypeChange = (type) => {
+    setPhotoMediaType(type);
+    if (type === 'poster' || type === 'brochure') {
+      const bpSection = sections.find((s) => s.id === 'brochures-posters');
+      if (bpSection) setPhotoSectionId('brochures-posters');
+    } else if (type === 'instagram') {
+      const socSection = sections.find((s) => s.id === 'socials');
+      if (socSection) setPhotoSectionId('socials');
     }
   };
 
@@ -310,12 +335,14 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
       showNotify('Please select a section.', 'error');
       return;
     }
-    if (!photoFile && !photoExternalUrl.trim()) {
+
+    const isBrochure = photoMediaType === 'brochure';
+    if (!photoFile && (!photoFiles || photoFiles.length === 0) && !photoExternalUrl.trim()) {
       showNotify('Please upload an image file or enter an image URL.', 'error');
       return;
     }
     if (!photoTitle.trim()) {
-      showNotify('Please enter a photo title.', 'error');
+      showNotify('Please enter a title.', 'error');
       return;
     }
 
@@ -323,11 +350,14 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
     try {
       await uploadAndAddPhoto({
         file: photoFile,
+        files: photoFiles,
         imageUrl: photoExternalUrl.trim(),
         sectionId: photoSectionId,
         subcategory: photoCompany || 'Misc',
         title: photoTitle.trim(),
-        isInstagram: photoIsInstagram,
+        mediaType: photoMediaType,
+        isInstagram: photoMediaType === 'instagram' || photoIsInstagram,
+        isBrochure: isBrochure,
       });
 
       // Refresh merged portfolio items
@@ -337,11 +367,12 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
 
       // Reset form
       setPhotoFile(null);
+      setPhotoFiles([]);
       setPhotoPreview(null);
       setPhotoExternalUrl('');
       setPhotoTitle('');
       setShowAddPhotoForm(false);
-      showNotify(`Photo "${photoTitle}" added to portfolio!`);
+      showNotify(`${photoMediaType === 'poster' ? 'Poster' : photoMediaType === 'brochure' ? 'Brochure' : 'Photo'} "${photoTitle}" added to portfolio!`);
     } catch (err) {
       showNotify(err.message || 'Failed to upload photo', 'error');
     } finally {
@@ -383,10 +414,17 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
     items.map((it) => ({ ...it, sectionKey: secKey }))
   );
 
-  const displayedPhotos =
-    photoFilterSection === 'all'
-      ? allPhotosList
-      : allPhotosList.filter((p) => p.sectionKey === photoFilterSection);
+  const posterCount = allPhotosList.filter((p) => p.sectionKey === 'brochures-posters' && !p.isBrochure).length;
+  const brochureCount = allPhotosList.filter((p) => p.isBrochure).length;
+
+  let displayedPhotos = allPhotosList;
+  if (photoFilterSection === 'posters') {
+    displayedPhotos = allPhotosList.filter((p) => p.sectionKey === 'brochures-posters' && !p.isBrochure);
+  } else if (photoFilterSection === 'brochures') {
+    displayedPhotos = allPhotosList.filter((p) => p.isBrochure);
+  } else if (photoFilterSection !== 'all') {
+    displayedPhotos = allPhotosList.filter((p) => p.sectionKey === photoFilterSection);
+  }
 
   const totalPhotosCount = allPhotosList.length;
 
@@ -450,7 +488,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
             onClick={() => setActiveTab('photos')}
           >
             <ImageIcon size={16} />
-            <span>Photos ({totalPhotosCount})</span>
+            <span>Posters & Media ({totalPhotosCount})</span>
           </button>
         </div>
 
@@ -485,7 +523,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                     <label>Section Title</label>
                     <input
                       type="text"
-                      placeholder="e.g. Brand Identity"
+                      placeholder="e.g. Brand Identity or Posters"
                       value={newTitle}
                       onChange={(e) => handleTitleChange(e.target.value)}
                       required
@@ -496,7 +534,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                     <label>Category Slug / Key</label>
                     <input
                       type="text"
-                      placeholder="e.g. brand-identity"
+                      placeholder="e.g. posters"
                       value={newId}
                       onChange={(e) => setNewId(slugify(e.target.value))}
                       required
@@ -508,7 +546,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                   <label>Subtitle / Description</label>
                   <input
                     type="text"
-                    placeholder="e.g. Comprehensive brand systems and design guidelines"
+                    placeholder="e.g. Event posters, marketing flyers, and graphic prints"
                     value={newSubtitle}
                     onChange={(e) => setNewSubtitle(e.target.value)}
                   />
@@ -536,132 +574,134 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                   <Loader2 size={28} className="spin text-accent" />
                   <span>Loading sections...</span>
                 </div>
-              ) : sections.map((sec, index) => {
-                const isEditing = editingId === sec.id;
-                const secCompanies = companies.filter((c) => c.section_id === sec.id);
+              ) : (
+                sections.map((sec, index) => {
+                  const isEditing = editingId === sec.id;
+                  const secCompanies = companies.filter((c) => c.section_id === sec.id);
 
-                return (
-                  <div
-                    key={sec.id}
-                    className={`admin-section-card glass-card ${!sec.visible ? 'is-hidden' : ''}`}
-                  >
-                    <div className="admin-section-order-controls">
-                      <button
-                        type="button"
-                        disabled={index === 0 || actionLoading}
-                        onClick={() => handleMove(index, 'up')}
-                        title="Move Up"
-                      >
-                        <ChevronUp size={16} />
-                      </button>
-                      <span className="admin-order-index">#{index + 1}</span>
-                      <button
-                        type="button"
-                        disabled={index === sections.length - 1 || actionLoading}
-                        onClick={() => handleMove(index, 'down')}
-                        title="Move Down"
-                      >
-                        <ChevronDown size={16} />
-                      </button>
-                    </div>
+                  return (
+                    <div
+                      key={sec.id}
+                      className={`admin-section-card glass-card ${!sec.visible ? 'is-hidden' : ''}`}
+                    >
+                      <div className="admin-section-order-controls">
+                        <button
+                          type="button"
+                          disabled={index === 0 || actionLoading}
+                          onClick={() => handleMove(index, 'up')}
+                          title="Move Up"
+                        >
+                          <ChevronUp size={16} />
+                        </button>
+                        <span className="admin-order-index">#{index + 1}</span>
+                        <button
+                          type="button"
+                          disabled={index === sections.length - 1 || actionLoading}
+                          onClick={() => handleMove(index, 'down')}
+                          title="Move Down"
+                        >
+                          <ChevronDown size={16} />
+                        </button>
+                      </div>
 
-                    <div className="admin-section-card__body">
-                      {isEditing ? (
-                        <div className="admin-edit-inline">
-                          <input
-                            type="text"
-                            className="admin-edit-input title"
-                            value={editTitle}
-                            onChange={(e) => setEditTitle(e.target.value)}
-                            placeholder="Section Title"
-                          />
-                          <input
-                            type="text"
-                            className="admin-edit-input subtitle"
-                            value={editSubtitle}
-                            onChange={(e) => setEditSubtitle(e.target.value)}
-                            placeholder="Section Subtitle"
-                          />
-                        </div>
-                      ) : (
-                        <>
-                          <div className="admin-sec-title-row">
-                            <h3 className="admin-sec-title">{sec.title}</h3>
-                            <span className="admin-sec-id-tag">id: {sec.id}</span>
-                            {!sec.visible && <span className="admin-hidden-badge">Hidden</span>}
+                      <div className="admin-section-card__body">
+                        {isEditing ? (
+                          <div className="admin-edit-inline">
+                            <input
+                              type="text"
+                              className="admin-edit-input title"
+                              value={editTitle}
+                              onChange={(e) => setEditTitle(e.target.value)}
+                              placeholder="Section Title"
+                            />
+                            <input
+                              type="text"
+                              className="admin-edit-input subtitle"
+                              value={editSubtitle}
+                              onChange={(e) => setEditSubtitle(e.target.value)}
+                              placeholder="Section Subtitle"
+                            />
                           </div>
-                          <p className="admin-sec-subtitle">{sec.subtitle || 'No subtitle provided'}</p>
-                          {secCompanies.length > 0 && (
-                            <div className="admin-subcat-chips">
-                              {secCompanies.map((c) => (
-                                <span key={c.id} className="admin-chip">
-                                  {c.name}
-                                </span>
-                              ))}
+                        ) : (
+                          <>
+                            <div className="admin-sec-title-row">
+                              <h3 className="admin-sec-title">{sec.title}</h3>
+                              <span className="admin-sec-id-tag">id: {sec.id}</span>
+                              {!sec.visible && <span className="admin-hidden-badge">Hidden</span>}
                             </div>
-                          )}
-                        </>
-                      )}
+                            <p className="admin-sec-subtitle">{sec.subtitle || 'No subtitle provided'}</p>
+                            {secCompanies.length > 0 && (
+                              <div className="admin-subcat-chips">
+                                {secCompanies.map((c) => (
+                                  <span key={c.id} className="admin-chip">
+                                    {c.name}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+
+                      <div className="admin-section-card__actions">
+                        {isEditing ? (
+                          <>
+                            <button
+                              type="button"
+                              className="admin-action-btn check"
+                              onClick={() => handleSaveEdit(sec.id)}
+                              title="Save"
+                              disabled={actionLoading}
+                            >
+                              <Check size={16} />
+                            </button>
+                            <button
+                              type="button"
+                              className="admin-action-btn cancel"
+                              onClick={cancelEditing}
+                              title="Cancel"
+                            >
+                              <X size={16} />
+                            </button>
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              type="button"
+                              className={`admin-action-btn ${sec.visible ? 'visible' : 'hidden'}`}
+                              onClick={() => handleToggleVisibility(sec)}
+                              title={sec.visible ? 'Hide section' : 'Show section'}
+                              disabled={actionLoading}
+                            >
+                              {sec.visible ? <Eye size={16} /> : <EyeOff size={16} />}
+                            </button>
+
+                            <button
+                              type="button"
+                              className="admin-action-btn edit"
+                              onClick={() => startEditing(sec)}
+                              title="Edit section"
+                              disabled={actionLoading}
+                            >
+                              <Edit2 size={16} />
+                            </button>
+
+                            <button
+                              type="button"
+                              className="admin-action-btn delete"
+                              onClick={() => handleDeleteSection(sec)}
+                              title="Delete section"
+                              disabled={actionLoading}
+                            >
+                              <Trash2 size={16} />
+                            </button>
+                          </>
+                        )}
+                      </div>
                     </div>
-
-                    <div className="admin-section-card__actions">
-                      {isEditing ? (
-                        <>
-                          <button
-                            type="button"
-                            className="admin-action-btn check"
-                            onClick={() => handleSaveEdit(sec.id)}
-                            title="Save"
-                            disabled={actionLoading}
-                          >
-                            <Check size={16} />
-                          </button>
-                          <button
-                            type="button"
-                            className="admin-action-btn cancel"
-                            onClick={cancelEditing}
-                            title="Cancel"
-                          >
-                            <X size={16} />
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button
-                            type="button"
-                            className={`admin-action-btn ${sec.visible ? 'visible' : 'hidden'}`}
-                            onClick={() => handleToggleVisibility(sec)}
-                            title={sec.visible ? 'Hide section' : 'Show section'}
-                            disabled={actionLoading}
-                          >
-                            {sec.visible ? <Eye size={16} /> : <EyeOff size={16} />}
-                          </button>
-
-                          <button
-                            type="button"
-                            className="admin-action-btn edit"
-                            onClick={() => startEditing(sec)}
-                            title="Edit section"
-                            disabled={actionLoading}
-                          >
-                            <Edit2 size={16} />
-                          </button>
-
-                          <button
-                            type="button"
-                            className="admin-action-btn delete"
-                            onClick={() => handleDeleteSection(sec)}
-                            title="Delete section"
-                            disabled={actionLoading}
-                          >
-                            <Trash2 size={16} />
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })
+              )}
             </div>
           </div>
         )}
@@ -672,7 +712,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
             <div className="admin-section-header">
               <div>
                 <h2>Companies & Subcategories</h2>
-                <p>Organize photos under brand names and clients (e.g. AWS, AuraWeb, Log10).</p>
+                <p>Organize posters and photos under brand names and clients (e.g. AWS, AuraWeb, Log10).</p>
               </div>
 
               <button
@@ -713,7 +753,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                     <label>Company / Brand Name</label>
                     <input
                       type="text"
-                      placeholder="e.g. Tesla, Google, Nike"
+                      placeholder="e.g. Tesla, Google, Log10"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       required
@@ -796,13 +836,13 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
           </div>
         )}
 
-        {/* ==================== TAB 3: PHOTOS ==================== */}
+        {/* ==================== TAB 3: PHOTOS & POSTERS ==================== */}
         {activeTab === 'photos' && (
           <div className="admin-tab-content">
             <div className="admin-section-header">
               <div>
-                <h2>Portfolio Photos & Media</h2>
-                <p>Upload new works, assign to sections and companies, or remove photos.</p>
+                <h2>Posters, Brochures & Photos</h2>
+                <p>Upload new posters, multi-page brochures, or designs directly to Supabase.</p>
               </div>
 
               <button
@@ -811,7 +851,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                 onClick={() => setShowAddPhotoForm(!showAddPhotoForm)}
               >
                 {showAddPhotoForm ? <X size={16} /> : <Plus size={16} />}
-                <span>{showAddPhotoForm ? 'Cancel' : 'Upload Photo'}</span>
+                <span>{showAddPhotoForm ? 'Cancel' : 'Upload Media'}</span>
               </button>
             </div>
 
@@ -819,7 +859,46 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
               <form onSubmit={handleAddPhoto} className="admin-add-form glass-card">
                 <div className="admin-add-form__title">
                   <UploadCloud size={16} className="text-accent" />
-                  <span>Upload & Publish New Photo</span>
+                  <span>Upload & Publish Media</span>
+                </div>
+
+                {/* Media Type Selector */}
+                <div className="admin-form-group">
+                  <label>Media Format / Type</label>
+                  <div className="admin-media-type-pills">
+                    <button
+                      type="button"
+                      className={`admin-type-pill ${photoMediaType === 'poster' ? 'is-active' : ''}`}
+                      onClick={() => handleMediaTypeChange('poster')}
+                    >
+                      <FileText size={14} />
+                      <span>🖼️ Poster / Print</span>
+                    </button>
+                    <button
+                      type="button"
+                      className={`admin-type-pill ${photoMediaType === 'brochure' ? 'is-active' : ''}`}
+                      onClick={() => handleMediaTypeChange('brochure')}
+                    >
+                      <BookOpen size={14} />
+                      <span>📖 Multi-Page Brochure</span>
+                    </button>
+                    <button
+                      type="button"
+                      className={`admin-type-pill ${photoMediaType === 'instagram' ? 'is-active' : ''}`}
+                      onClick={() => handleMediaTypeChange('instagram')}
+                    >
+                      <Smartphone size={14} />
+                      <span>📱 Instagram Carousel</span>
+                    </button>
+                    <button
+                      type="button"
+                      className={`admin-type-pill ${photoMediaType === 'standard' ? 'is-active' : ''}`}
+                      onClick={() => handleMediaTypeChange('standard')}
+                    >
+                      <ImageIcon size={14} />
+                      <span>🎨 Standard Artwork</span>
+                    </button>
+                  </div>
                 </div>
 
                 <div className="admin-grid-2">
@@ -847,7 +926,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                     <input
                       type="text"
                       list="companies-datalist"
-                      placeholder="Select or type company (e.g. AWS)"
+                      placeholder="Select or type company (e.g. AWS, Log10)"
                       value={photoCompany}
                       onChange={(e) => setPhotoCompany(e.target.value)}
                     />
@@ -862,10 +941,16 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                 </div>
 
                 <div className="admin-form-group">
-                  <label>Photo Title</label>
+                  <label>{photoMediaType === 'poster' ? 'Poster Title' : photoMediaType === 'brochure' ? 'Brochure Title' : 'Artwork Title'}</label>
                   <input
                     type="text"
-                    placeholder="e.g. AWS Innovya Conference Poster"
+                    placeholder={
+                      photoMediaType === 'poster'
+                        ? 'e.g. Blue Futuristic Technology Poster'
+                        : photoMediaType === 'brochure'
+                        ? 'e.g. Hampta Pass Trek Brochure'
+                        : 'e.g. AWS Brand Mark'
+                    }
                     value={photoTitle}
                     onChange={(e) => setPhotoTitle(e.target.value)}
                     required
@@ -873,17 +958,30 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                 </div>
 
                 <div className="admin-form-group">
-                  <label>Select Image File (Upload to Supabase Storage)</label>
+                  <label>
+                    {photoMediaType === 'brochure'
+                      ? 'Select Brochure Pages (Select multiple images for Page 1, Page 2...)'
+                      : 'Select Image File (PNG, JPG, WebP)'}
+                  </label>
                   <div className="admin-upload-dropzone">
                     <input
                       type="file"
                       id="photo-file-input"
                       accept="image/*"
+                      multiple={photoMediaType === 'brochure'}
                       onChange={handleFileSelect}
                     />
                     <label htmlFor="photo-file-input" className="admin-dropzone-label">
                       <UploadCloud size={24} className="text-accent" />
-                      <span>{photoFile ? photoFile.name : 'Click to browse image (PNG, JPG, WebP)'}</span>
+                      <span>
+                        {photoMediaType === 'brochure' && photoFiles.length > 0
+                          ? `Selected ${photoFiles.length} pages: ${photoFiles.map((f) => f.name).join(', ')}`
+                          : photoFile
+                          ? photoFile.name
+                          : photoMediaType === 'brochure'
+                          ? 'Click to select all brochure pages (Hold Ctrl/Cmd to select multiple)'
+                          : 'Click to browse poster image (PNG, JPG, WebP)'}
+                      </span>
                     </label>
                   </div>
                 </div>
@@ -891,29 +989,21 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                 {photoPreview && (
                   <div className="admin-photo-preview-wrap">
                     <img src={photoPreview} alt="Preview" className="admin-photo-preview" />
+                    {photoMediaType === 'brochure' && photoFiles.length > 1 && (
+                      <span className="admin-preview-page-tag">Cover Page + {photoFiles.length - 1} pages</span>
+                    )}
                   </div>
                 )}
 
-                <div className="admin-form-group">
-                  <label>Or External Image URL (Optional)</label>
-                  <input
-                    type="url"
-                    placeholder="https://images.unsplash.com/photo-..."
-                    value={photoExternalUrl}
-                    onChange={(e) => setPhotoExternalUrl(e.target.value)}
-                  />
-                </div>
-
-                {photoSectionId === 'socials' && (
-                  <div className="admin-checkbox-group">
-                    <label className="admin-checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={photoIsInstagram}
-                        onChange={(e) => setPhotoIsInstagram(e.target.checked)}
-                      />
-                      <span>Display as continuous Instagram horizontal carousel</span>
-                    </label>
+                {photoMediaType !== 'brochure' && (
+                  <div className="admin-form-group">
+                    <label>Or External Image URL (Optional)</label>
+                    <input
+                      type="url"
+                      placeholder="https://..."
+                      value={photoExternalUrl}
+                      onChange={(e) => setPhotoExternalUrl(e.target.value)}
+                    />
                   </div>
                 )}
 
@@ -925,13 +1015,14 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                       setShowAddPhotoForm(false);
                       setPhotoPreview(null);
                       setPhotoFile(null);
+                      setPhotoFiles([]);
                     }}
                   >
                     Cancel
                   </button>
                   <button type="submit" className="admin-save-btn" disabled={actionLoading}>
                     {actionLoading ? <Loader2 size={16} className="spin" /> : <UploadCloud size={16} />}
-                    <span>Upload & Save</span>
+                    <span>{actionLoading ? 'Uploading...' : `Upload & Save ${photoMediaType === 'poster' ? 'Poster' : photoMediaType === 'brochure' ? 'Brochure' : 'Photo'}`}</span>
                   </button>
                 </div>
               </form>
@@ -939,7 +1030,7 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
 
             {/* Filter Toolbar */}
             <div className="admin-filter-bar">
-              <span className="admin-filter-label">Filter by Section:</span>
+              <span className="admin-filter-label">Filter:</span>
               <div className="admin-filter-pills">
                 <button
                   type="button"
@@ -948,27 +1039,43 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                 >
                   All ({allPhotosList.length})
                 </button>
-                {sections.map((sec) => {
-                  const count = (portfolioData[sec.id] || []).length;
-                  return (
-                    <button
-                      key={sec.id}
-                      type="button"
-                      className={`admin-filter-pill ${photoFilterSection === sec.id ? 'is-active' : ''}`}
-                      onClick={() => setPhotoFilterSection(sec.id)}
-                    >
-                      {sec.title} ({count})
-                    </button>
-                  );
-                })}
+                <button
+                  type="button"
+                  className={`admin-filter-pill poster ${photoFilterSection === 'posters' ? 'is-active' : ''}`}
+                  onClick={() => setPhotoFilterSection('posters')}
+                >
+                  🖼️ Posters ({posterCount})
+                </button>
+                <button
+                  type="button"
+                  className={`admin-filter-pill brochure ${photoFilterSection === 'brochures' ? 'is-active' : ''}`}
+                  onClick={() => setPhotoFilterSection('brochures')}
+                >
+                  📖 Brochures ({brochureCount})
+                </button>
+                {sections
+                  .filter((sec) => sec.id !== 'brochures-posters')
+                  .map((sec) => {
+                    const count = (portfolioData[sec.id] || []).length;
+                    return (
+                      <button
+                        key={sec.id}
+                        type="button"
+                        className={`admin-filter-pill ${photoFilterSection === sec.id ? 'is-active' : ''}`}
+                        onClick={() => setPhotoFilterSection(sec.id)}
+                      >
+                        {sec.title} ({count})
+                      </button>
+                    );
+                  })}
               </div>
             </div>
 
-            {/* Photos Grid */}
+            {/* Photos & Posters Grid */}
             <div className="admin-photos-gallery">
               {displayedPhotos.length === 0 ? (
                 <div className="admin-empty-state glass-card">
-                  <p>No photos found in this section. Click <strong>Upload Photo</strong> above.</p>
+                  <p>No media found in this filter. Click <strong>Upload Media</strong> above.</p>
                 </div>
               ) : (
                 displayedPhotos.map((photo) => (
@@ -994,6 +1101,16 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                         {photo.title}
                       </h4>
                       <div className="admin-photo-meta-tags">
+                        {photo.isBrochure ? (
+                          <span className="admin-photo-tag brochure">
+                            Brochure ({photo.pages?.length || 'multi'}p)
+                          </span>
+                        ) : photo.sectionKey === 'brochures-posters' ? (
+                          <span className="admin-photo-tag poster">Poster</span>
+                        ) : null}
+                        {photo.instagram && (
+                          <span className="admin-photo-tag insta">Instagram</span>
+                        )}
                         <span className="admin-photo-tag">{photo.subcategory || 'Misc'}</span>
                         {photo.isCustom && <span className="admin-photo-custom-tag">Custom</span>}
                       </div>
