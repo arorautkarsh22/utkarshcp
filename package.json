@@ -10,16 +10,17 @@
     "process-images": "node scripts/process-images.mjs"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "motion": "^12.12.1",
+    "@supabase/supabase-js": "^2.119.2",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.511.0",
-    "clsx": "^2.1.1"
+    "motion": "^12.12.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.5.2",
-    "vite": "^6.3.5",
+    "pdf2pic": "^3.1.4",
     "sharp": "^0.34.2",
-    "pdf2pic": "^3.1.4"
+    "vite": "^6.3.5"
   }
 }

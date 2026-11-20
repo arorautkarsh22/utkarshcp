@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Linkedin, Mail, Phone, Github, Heart } from 'lucide-react';
+import { Linkedin, Mail, Phone, Github, Heart, Lock } from 'lucide-react';
 import { InView } from './motion-primitives';
 import './Footer.css';
 
@@ -51,9 +51,14 @@ export default function Footer() {
             <p className="footer__copyright">
               © {new Date().getFullYear()} Utkarsh Arora. All rights reserved.
             </p>
-            <p className="footer__made-with">
-              Made with <Heart size={12} className="footer__heart" /> and creativity
-            </p>
+            <div className="footer__bottom-right">
+              <p className="footer__made-with">
+                Made with <Heart size={12} className="footer__heart" /> and creativity
+              </p>
+              <a href="#admin" className="footer__admin-link" title="Admin Studio">
+                <Lock size={12} />
+              </a>
+            </div>
           </div>
         </InView>
       </div>

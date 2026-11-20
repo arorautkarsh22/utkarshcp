@@ -27,8 +27,11 @@ const CATEGORY_META = {
   },
 };
 
-export default function CategorySection({ categoryId, images, onImageClick }) {
-  const meta = CATEGORY_META[categoryId] || { title: categoryId, subtitle: '' };
+export default function CategorySection({ categoryId, title, subtitle, images, onImageClick }) {
+  const meta = {
+    title: title || CATEGORY_META[categoryId]?.title || categoryId,
+    subtitle: subtitle !== undefined ? subtitle : (CATEGORY_META[categoryId]?.subtitle || ''),
+  };
 
   // Group images by subcategory
   const grouped = {};

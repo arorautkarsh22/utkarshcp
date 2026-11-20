@@ -99,6 +99,28 @@
   fill: var(--color-accent-2);
 }
 
+.footer__bottom-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.footer__admin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  opacity: 0.4;
+  transition: all 0.2s ease;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.footer__admin-link:hover {
+  opacity: 1;
+  color: var(--color-accent-1);
+}
+
 @media (max-width: 768px) {
   .footer__content {
     flex-direction: column;
