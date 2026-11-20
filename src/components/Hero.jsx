@@ -149,13 +149,10 @@ export default function Hero() {
         >
           <span className="hero__scroll-text">View My Work</span>
           <div className="hero__scroll-indicator">
-            <ChevronDown size={18} />
+            <ChevronDown size={20} strokeWidth={2.5} />
           </div>
         </motion.button>
       </div>
-
-      {/* Subtle bottom transition gradient */}
-      <div className="hero__bottom-fade" />
     </section>
   );
 }

@@ -9,11 +9,11 @@
   margin: 0 auto;
 }
 
-/* High-contrast About Me Card */
+/* High-contrast About Me Card with rounded corners and generous padding */
 .about-section__card {
   position: relative;
-  padding: var(--space-12) var(--space-14);
-  border-radius: var(--radius-2xl);
+  padding: 3.5rem 4rem;
+  border-radius: 28px;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -64,7 +64,7 @@
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.02em;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
   position: relative;
   display: inline-block;
 }
@@ -72,7 +72,7 @@
 .about-section__desc {
   font-size: var(--text-lg);
   color: #c4c4dc;
-  line-height: 1.7;
+  line-height: 1.75;
   max-width: 760px;
 }
 
@@ -82,14 +82,17 @@
   }
 
   .about-section__card {
-    padding: var(--space-8) var(--space-6);
+    padding: 2.25rem 1.75rem;
+    border-radius: 20px;
   }
 
   .about-section__title {
     font-size: var(--text-2xl);
+    margin-bottom: var(--space-3);
   }
 
   .about-section__desc {
     font-size: var(--text-base);
+    line-height: 1.65;
   }
 }
