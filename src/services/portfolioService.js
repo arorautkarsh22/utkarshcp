@@ -94,7 +94,7 @@ export async function getMergedPortfolioData() {
     const { data: customData } = await supabase
       .from('portfolio_items')
       .select('*')
-      .order('created_at', { ascending: true });
+      .order('sort_order', { ascending: true });
 
     if (customData && customData.length > 0) {
       supabaseItems = customData;
@@ -113,6 +113,7 @@ export async function getMergedPortfolioData() {
       const imgUrl = item.image_url || item.full;
       result[item.section_id].push({
         id: item.id,
+        section_id: item.section_id,
         title: item.title,
         subcategory: item.subcategory,
         full: imgUrl,
@@ -121,6 +122,7 @@ export async function getMergedPortfolioData() {
         instagram: Boolean(item.is_instagram),
         isBrochure: Boolean(item.is_brochure),
         pages: item.pages || null,
+        sort_order: item.sort_order || 0,
         isCustom: true,
       });
     }
@@ -183,6 +185,22 @@ export async function uploadAndAddPhoto({
       });
     }
 
+    // Compute next sort order
+    let nextSortOrder = 99;
+    try {
+      const { data: maxRow } = await supabase
+        .from('portfolio_items')
+        .select('sort_order')
+        .eq('section_id', sectionId)
+        .order('sort_order', { ascending: false })
+        .limit(1);
+      if (maxRow && maxRow.length > 0 && typeof maxRow[0].sort_order === 'number') {
+        nextSortOrder = maxRow[0].sort_order + 1;
+      }
+    } catch {
+      // fallback
+    }
+
     const itemId = `brochure-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
     const { data, error } = await supabase
       .from('portfolio_items')
@@ -197,6 +215,7 @@ export async function uploadAndAddPhoto({
           is_instagram: false,
           is_brochure: true,
           pages: pages,
+          sort_order: nextSortOrder,
         },
       ])
       .select();
@@ -237,6 +256,22 @@ export async function uploadAndAddPhoto({
     throw new Error('Please select an image file or provide an image URL.');
   }
 
+  // Compute next sort order
+  let nextSortOrder = 99;
+  try {
+    const { data: maxRow } = await supabase
+      .from('portfolio_items')
+      .select('sort_order')
+      .eq('section_id', sectionId)
+      .order('sort_order', { ascending: false })
+      .limit(1);
+    if (maxRow && maxRow.length > 0 && typeof maxRow[0].sort_order === 'number') {
+      nextSortOrder = maxRow[0].sort_order + 1;
+    }
+  } catch {
+    // fallback
+  }
+
   const itemId = `${mediaType || 'photo'}-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
 
   const { data, error } = await supabase
@@ -252,6 +287,7 @@ export async function uploadAndAddPhoto({
         is_instagram: isInstagramType,
         is_brochure: false,
         pages: null,
+        sort_order: nextSortOrder,
       },
     ])
     .select();
@@ -273,3 +309,22 @@ export async function removePhoto(photoId) {
   // Also record in deleted_items so local manifest photos stay hidden
   await supabase.from('deleted_items').insert([{ id: photoId }]);
 }
+
+/**
+ * Persist the updated sort order for a list of photos
+ */
+export async function reorderPhotos(orderedPhotosList) {
+  const updates = orderedPhotosList.map((photo, index) =>
+    supabase
+      .from('portfolio_items')
+      .update({ sort_order: index + 1 })
+      .eq('id', photo.id)
+  );
+
+  const results = await Promise.all(updates);
+  const firstError = results.find((r) => r.error)?.error;
+  if (firstError) {
+    throw firstError;
+  }
+}
+

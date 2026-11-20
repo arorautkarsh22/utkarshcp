@@ -81,9 +81,14 @@
   transition: all 0.2s ease;
 }
 
-.admin-viewer-icon-btn:hover {
+.admin-viewer-icon-btn:hover:not(:disabled) {
   background: rgba(255, 255, 255, 0.1);
   color: var(--color-text-primary);
+}
+
+.admin-viewer-icon-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .admin-viewer-icon-btn.danger:hover {

@@ -20,6 +20,10 @@ export default function AdminMediaViewer({
   onNext,
   onPrev,
   onDelete,
+  onMoveEarlier,
+  onMoveLater,
+  hasMoveEarlier,
+  hasMoveLater,
   hasPrev,
   hasNext,
   currentIndex,
@@ -103,6 +107,32 @@ export default function AdminMediaViewer({
           </div>
 
           <div className="admin-viewer-header__actions">
+            {onMoveEarlier && (
+              <button
+                type="button"
+                className="admin-viewer-icon-btn"
+                disabled={!hasMoveEarlier}
+                onClick={onMoveEarlier}
+                title={hasMoveEarlier ? "Move Earlier in Section" : "Already First"}
+              >
+                <ChevronLeft size={16} />
+                <span>Move Earlier</span>
+              </button>
+            )}
+
+            {onMoveLater && (
+              <button
+                type="button"
+                className="admin-viewer-icon-btn"
+                disabled={!hasMoveLater}
+                onClick={onMoveLater}
+                title={hasMoveLater ? "Move Later in Section" : "Already Last"}
+              >
+                <span>Move Later</span>
+                <ChevronRight size={16} />
+              </button>
+            )}
+
             <button
               type="button"
               className="admin-viewer-icon-btn"

@@ -14,6 +14,7 @@ import {
   getMergedPortfolioData,
   uploadAndAddPhoto,
   removePhoto,
+  reorderPhotos,
 } from '../../services/portfolioService';
 import {
   ArrowLeft,
@@ -27,6 +28,8 @@ import {
   EyeOff,
   ChevronUp,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Loader2,
   Sparkles,
   Layers,
@@ -403,6 +406,44 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
       showNotify(err.message || 'Failed to delete photo', 'error');
     } finally {
       setActionLoading(false);
+    }
+  };
+
+  const handleMovePhoto = async (photo, direction, e) => {
+    if (e) e.stopPropagation();
+    const sectionKey = photo.sectionKey || photo.section_id;
+    const currentSectionItems = [...(portfolioData[sectionKey] || [])];
+    const currentIndex = currentSectionItems.findIndex((it) => it.id === photo.id);
+
+    if (currentIndex === -1) return;
+
+    const targetIndex = direction === 'left' || direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+    if (targetIndex < 0 || targetIndex >= currentSectionItems.length) return;
+
+    // Swap items locally
+    const updatedSectionItems = [...currentSectionItems];
+    const temp = updatedSectionItems[currentIndex];
+    updatedSectionItems[currentIndex] = updatedSectionItems[targetIndex];
+    updatedSectionItems[targetIndex] = temp;
+
+    // Update sort_order locally
+    updatedSectionItems.forEach((it, idx) => {
+      it.sort_order = idx + 1;
+    });
+
+    const updatedPort = {
+      ...portfolioData,
+      [sectionKey]: updatedSectionItems,
+    };
+    setPortfolioData(updatedPort);
+    if (onPortfolioChanged) onPortfolioChanged(updatedPort);
+
+    try {
+      await reorderPhotos(updatedSectionItems);
+      showNotify(`Moved "${photo.title}" to position #${targetIndex + 1}`);
+    } catch (err) {
+      console.error('Failed to save media order:', err);
+      showNotify(err.message || 'Failed to persist media order', 'error');
     }
   };
 
@@ -1080,77 +1121,130 @@ export default function AdminPanel({ user, onBackToSite, onSectionsChanged, onPo
                   <p>No media found in this filter. Click <strong>Upload Media</strong> above.</p>
                 </div>
               ) : (
-                displayedPhotos.map((photo, idx) => (
-                  <div
-                    key={photo.id}
-                    className="admin-photo-card glass-card is-clickable"
-                    onClick={() => setViewerIndex(idx)}
-                    title="Click to view media"
-                  >
-                    <div className="admin-photo-thumb-wrap">
-                      <img
-                        src={photo.thumb || photo.thumb_url || photo.full || photo.image_url}
-                        alt={photo.title}
-                        loading="lazy"
-                      />
-                      <div className="admin-photo-hover-hint">
-                        <Eye size={18} />
-                        <span>Preview</span>
-                      </div>
-                      <button
-                        type="button"
-                        className="admin-photo-delete-overlay"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeletePhoto(photo);
-                        }}
-                        title="Delete photo"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </div>
+                displayedPhotos.map((photo, idx) => {
+                  const sectionKey = photo.sectionKey || photo.section_id;
+                  const sectionItems = portfolioData[sectionKey] || [];
+                  const itemIndexInSection = sectionItems.findIndex((it) => it.id === photo.id);
+                  const isFirst = itemIndexInSection <= 0;
+                  const isLast = itemIndexInSection === -1 || itemIndexInSection >= sectionItems.length - 1;
+                  const displayOrderNum = itemIndexInSection >= 0 ? itemIndexInSection + 1 : idx + 1;
 
-                    <div className="admin-photo-card-info">
-                      <h4 className="admin-photo-title" title={photo.title}>
-                        {photo.title}
-                      </h4>
-                      <div className="admin-photo-meta-tags">
-                        {photo.isBrochure ? (
-                          <span className="admin-photo-tag brochure">
-                            Brochure ({photo.pages?.length || 'multi'}p)
+                  return (
+                    <div
+                      key={photo.id}
+                      className="admin-photo-card glass-card is-clickable"
+                      onClick={() => setViewerIndex(idx)}
+                      title="Click to view media"
+                    >
+                      <div className="admin-photo-thumb-wrap">
+                        <img
+                          src={photo.thumb || photo.thumb_url || photo.full || photo.image_url}
+                          alt={photo.title}
+                          loading="lazy"
+                        />
+
+                        {/* Reorder controls overlay */}
+                        <div className="admin-photo-reorder-bar" onClick={(e) => e.stopPropagation()}>
+                          <button
+                            type="button"
+                            className="admin-photo-reorder-btn"
+                            disabled={isFirst}
+                            onClick={(e) => handleMovePhoto(photo, 'left', e)}
+                            title={isFirst ? 'Already at first position' : 'Move Earlier (Left)'}
+                            aria-label="Move Earlier"
+                          >
+                            <ChevronLeft size={13} />
+                          </button>
+                          <span
+                            className="admin-photo-order-badge"
+                            title={`Position #${displayOrderNum} in ${photo.subcategory || sectionKey}`}
+                          >
+                            #{displayOrderNum}
                           </span>
-                        ) : photo.sectionKey === 'brochures-posters' ? (
-                          <span className="admin-photo-tag poster">Poster</span>
-                        ) : null}
-                        {photo.instagram && (
-                          <span className="admin-photo-tag insta">Instagram</span>
-                        )}
-                        <span className="admin-photo-tag">{photo.subcategory || 'Misc'}</span>
-                        {photo.isCustom && <span className="admin-photo-custom-tag">Custom</span>}
+                          <button
+                            type="button"
+                            className="admin-photo-reorder-btn"
+                            disabled={isLast}
+                            onClick={(e) => handleMovePhoto(photo, 'right', e)}
+                            title={isLast ? 'Already at last position' : 'Move Later (Right)'}
+                            aria-label="Move Later"
+                          >
+                            <ChevronRight size={13} />
+                          </button>
+                        </div>
+
+                        <div className="admin-photo-hover-hint">
+                          <Eye size={18} />
+                          <span>Preview</span>
+                        </div>
+                        <button
+                          type="button"
+                          className="admin-photo-delete-overlay"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeletePhoto(photo);
+                          }}
+                          title="Delete photo"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+
+                      <div className="admin-photo-card-info">
+                        <h4 className="admin-photo-title" title={photo.title}>
+                          {photo.title}
+                        </h4>
+                        <div className="admin-photo-meta-tags">
+                          {photo.isBrochure ? (
+                            <span className="admin-photo-tag brochure">
+                              Brochure ({photo.pages?.length || 'multi'}p)
+                            </span>
+                          ) : photo.sectionKey === 'brochures-posters' ? (
+                            <span className="admin-photo-tag poster">Poster</span>
+                          ) : null}
+                          {photo.instagram && (
+                            <span className="admin-photo-tag insta">Instagram</span>
+                          )}
+                          <span className="admin-photo-tag">{photo.subcategory || 'Misc'}</span>
+                          {photo.isCustom && <span className="admin-photo-custom-tag">Custom</span>}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
               )}
             </div>
 
             {/* Media Lightbox Viewer Modal */}
-            {viewerIndex !== null && displayedPhotos[viewerIndex] && (
-              <AdminMediaViewer
-                photo={displayedPhotos[viewerIndex]}
-                onClose={() => setViewerIndex(null)}
-                onNext={() => setViewerIndex((prev) => Math.min(prev + 1, displayedPhotos.length - 1))}
-                onPrev={() => setViewerIndex((prev) => Math.max(prev - 1, 0))}
-                hasNext={viewerIndex < displayedPhotos.length - 1}
-                hasPrev={viewerIndex > 0}
-                currentIndex={viewerIndex}
-                totalCount={displayedPhotos.length}
-                onDelete={(p) => {
-                  handleDeletePhoto(p);
-                  setViewerIndex(null);
-                }}
-              />
-            )}
+            {viewerIndex !== null && displayedPhotos[viewerIndex] && (() => {
+              const currentPhoto = displayedPhotos[viewerIndex];
+              const currentSecKey = currentPhoto.sectionKey || currentPhoto.section_id;
+              const currentSecItems = portfolioData[currentSecKey] || [];
+              const currSecIdx = currentSecItems.findIndex((it) => it.id === currentPhoto.id);
+              const hasMoveEarlier = currSecIdx > 0;
+              const hasMoveLater = currSecIdx !== -1 && currSecIdx < currentSecItems.length - 1;
+
+              return (
+                <AdminMediaViewer
+                  photo={currentPhoto}
+                  onClose={() => setViewerIndex(null)}
+                  onNext={() => setViewerIndex((prev) => Math.min(prev + 1, displayedPhotos.length - 1))}
+                  onPrev={() => setViewerIndex((prev) => Math.max(prev - 1, 0))}
+                  hasNext={viewerIndex < displayedPhotos.length - 1}
+                  hasPrev={viewerIndex > 0}
+                  currentIndex={viewerIndex}
+                  totalCount={displayedPhotos.length}
+                  onDelete={(p) => {
+                    handleDeletePhoto(p);
+                    setViewerIndex(null);
+                  }}
+                  onMoveEarlier={() => handleMovePhoto(currentPhoto, 'left')}
+                  onMoveLater={() => handleMovePhoto(currentPhoto, 'right')}
+                  hasMoveEarlier={hasMoveEarlier}
+                  hasMoveLater={hasMoveLater}
+                />
+              );
+            })()}
           </div>
         )}
       </main>
